@@ -7,7 +7,7 @@ using MongoDB.Bson;
 
 var builder = WebApplication.CreateBuilder(args);
 var frontendUrl = builder.Configuration.GetValue<string>("FrontendSettings:FrontendUrl");
-Console.WriteLine($"Mongo URI from ENV: {frontendUrl}");
+
 if (string.IsNullOrEmpty(frontendUrl))
 {
     // Handle the case where frontendUrl is missing
@@ -15,6 +15,8 @@ if (string.IsNullOrEmpty(frontendUrl))
 }
 
 // Add services to the container.
+builder.Logging.ClearProviders();  // Remove default providers
+builder.Logging.AddConsole();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -32,8 +34,6 @@ builder.Services.Configure<MongoDbSettings>(
 builder.Services.AddSingleton<AppDbContext>();
 
 var config = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
-Console.WriteLine($"Mongo URI from ENV: {config?.AtlasURI}");
-Console.WriteLine($"Mongo DB Name from ENV: {config?.DatabaseName ?? "Not set"}");
 
 builder.Services.AddCors(options =>
 {

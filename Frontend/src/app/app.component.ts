@@ -10,8 +10,4 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent {
   title = 'Frontend';
-
-  constructor(){
-    console.log(environment.baseApiUrl);
-  }
 }

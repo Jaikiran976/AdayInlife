@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Bson;
 using MongoDB.Driver;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Backend.Controllers
 {
@@ -16,13 +15,12 @@ namespace Backend.Controllers
     public class AuthController : ControllerBase
     {
         private readonly AppDbContext _context;
-        // private readonly IMongoCollection<SignUp>? _contextDB;
+        ILogger<AuthController> _logger;
 
-        public AuthController(AppDbContext context/*, MongoDbService mongoDbService*/)
+        public AuthController(AppDbContext context,ILogger<AuthController> logger)
         {
             _context = context;
-
-            //_contextDB = mongoDbService.Database?.GetCollection<SignUp>("users");
+            _logger = logger;
         }
 
         //Signing up the user
@@ -108,6 +106,7 @@ namespace Backend.Controllers
         [HttpGet("GetSecurityQuestion")]
         public async Task<IActionResult> GetSecurityQuestion([FromQuery] string usernameOrEmail)
         {
+            _logger.LogInformation("Processing query: {query}", usernameOrEmail);
             //var users = await _context.Users.ToListAsync();
             var users = await _context.SignUps.Find(_ => true).ToListAsync();
             //check with mail first if the user exists

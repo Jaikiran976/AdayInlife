@@ -35,6 +35,7 @@ namespace Backend.Data
                 // Test connection by pinging the server
                 var command = new BsonDocument("ping", 1);
                 _database.RunCommand<BsonDocument>(command);
+                Console.WriteLine("connected");
             }
             catch (Exception ex)
             {
