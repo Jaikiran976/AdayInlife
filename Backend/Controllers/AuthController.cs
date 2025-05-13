@@ -23,6 +23,14 @@ namespace Backend.Controllers
             _logger = logger;
         }
 
+        [HttpGet("my-ip")]
+        public async Task<IActionResult> GetMyIp()
+        {
+            using var httpClient = new HttpClient();
+            var ip = await httpClient.GetStringAsync("https://api.ipify.org");
+            return Ok(new { ip });
+        }
+
         //Signing up the user
         [HttpPost("SignUp")]
         public async Task<IActionResult> SignUp([FromBody] SignUp user)
