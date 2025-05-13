@@ -5,8 +5,8 @@ WORKDIR /src
 # Copy everything in the current folder (your project)
 COPY . .
 
-RUN dotnet restore BackEnd.csproj
-RUN dotnet publish BackEnd.csproj -c Release -o /app/publish
+RUN dotnet restore Backend.csproj
+RUN dotnet publish Backend.csproj -c Release -o /app/publish
 
 # Stage 2: Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
@@ -19,6 +19,6 @@ COPY --from=build /app/publish .
 ENV ASPNETCORE_URLS=http://0.0.0.0:$PORT
 
 # Default entry point (will use the dynamic port from Render)
-ENTRYPOINT ["dotnet", "BackEnd.dll"]
+ENTRYPOINT ["dotnet", "Backend.dll"]
 
 
