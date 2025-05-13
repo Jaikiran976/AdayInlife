@@ -31,6 +31,10 @@ builder.Services.Configure<MongoDbSettings>(
     builder.Configuration.GetSection("MongoDbSettings"));
 builder.Services.AddSingleton<AppDbContext>();
 
+var config = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
+Console.WriteLine($"Mongo URI from ENV: {(string.IsNullOrEmpty(config?.AtlasURI) ? "Not set" : "Se ")}");
+Console.WriteLine($"Mongo DB Name from ENV: {config?.DatabaseName ?? "Not set"}");
+
 var app = builder.Build();
 
 //using (var scope = app.Services.CreateScope())
