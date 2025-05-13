@@ -1,0 +1,143 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Web dev\\Projects\\Full Stack\\Backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{309A5114-1EE9-4D0B-B098-431721A58582}|Backend.csproj|d:\\web dev\\projects\\full stack\\backend\\data\\appdbcontext .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{309A5114-1EE9-4D0B-B098-431721A58582}|Backend.csproj|solutionrelative:data\\appdbcontext .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{309A5114-1EE9-4D0B-B098-431721A58582}|Backend.csproj|d:\\web dev\\projects\\full stack\\backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{309A5114-1EE9-4D0B-B098-431721A58582}|Backend.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{309A5114-1EE9-4D0B-B098-431721A58582}|Backend.csproj|d:\\web dev\\projects\\full stack\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{309A5114-1EE9-4D0B-B098-431721A58582}|Backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{309A5114-1EE9-4D0B-B098-431721A58582}|Backend.csproj|d:\\web dev\\projects\\full stack\\backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{309A5114-1EE9-4D0B-B098-431721A58582}|Backend.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{309A5114-1EE9-4D0B-B098-431721A58582}|Backend.csproj|d:\\web dev\\projects\\full stack\\backend\\models\\signup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{309A5114-1EE9-4D0B-B098-431721A58582}|Backend.csproj|solutionrelative:models\\signup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{309A5114-1EE9-4D0B-B098-431721A58582}|Backend.csproj|d:\\web dev\\projects\\full stack\\backend\\models\\signin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{309A5114-1EE9-4D0B-B098-431721A58582}|Backend.csproj|solutionrelative:models\\signin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{309A5114-1EE9-4D0B-B098-431721A58582}|Backend.csproj|d:\\web dev\\projects\\full stack\\backend\\models\\mongodbsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{309A5114-1EE9-4D0B-B098-431721A58582}|Backend.csproj|solutionrelative:models\\mongodbsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AppDbContext .cs",
+              "DocumentMoniker": "D:\\Web dev\\Projects\\Full Stack\\Backend\\Data\\AppDbContext .cs",
+              "RelativeDocumentMoniker": "Data\\AppDbContext .cs",
+              "ToolTip": "D:\\Web dev\\Projects\\Full Stack\\Backend\\Data\\AppDbContext .cs",
+              "RelativeToolTip": "Data\\AppDbContext .cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAwwEMAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T13:28:59.418Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\Web dev\\Projects\\Full Stack\\Backend\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
+              "ToolTip": "D:\\Web dev\\Projects\\Full Stack\\Backend\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Controllers\\AuthController.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAIwEsAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T13:06:21.768Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SignIn.cs",
+              "DocumentMoniker": "D:\\Web dev\\Projects\\Full Stack\\Backend\\Models\\SignIn.cs",
+              "RelativeDocumentMoniker": "Models\\SignIn.cs",
+              "ToolTip": "D:\\Web dev\\Projects\\Full Stack\\Backend\\Models\\SignIn.cs",
+              "RelativeToolTip": "Models\\SignIn.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T13:00:04.998Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SignUp.cs",
+              "DocumentMoniker": "D:\\Web dev\\Projects\\Full Stack\\Backend\\Models\\SignUp.cs",
+              "RelativeDocumentMoniker": "Models\\SignUp.cs",
+              "ToolTip": "D:\\Web dev\\Projects\\Full Stack\\Backend\\Models\\SignUp.cs",
+              "RelativeToolTip": "Models\\SignUp.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAQwDEAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T13:00:03.663Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MongoDbSettings.cs",
+              "DocumentMoniker": "D:\\Web dev\\Projects\\Full Stack\\Backend\\Models\\MongoDbSettings.cs",
+              "RelativeDocumentMoniker": "Models\\MongoDbSettings.cs",
+              "ToolTip": "D:\\Web dev\\Projects\\Full Stack\\Backend\\Models\\MongoDbSettings.cs",
+              "RelativeToolTip": "Models\\MongoDbSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T12:59:52.096Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Web dev\\Projects\\Full Stack\\Backend\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\Web dev\\Projects\\Full Stack\\Backend\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAcwFwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T12:39:13.72Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Web dev\\Projects\\Full Stack\\Backend\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\Web dev\\Projects\\Full Stack\\Backend\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-09T15:19:56.066Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
