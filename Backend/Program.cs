@@ -6,8 +6,8 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 
 var builder = WebApplication.CreateBuilder(args);
-var frontendUrl = builder.Configuration.GetValue<string>("FrontendSettings:FrontendUrl"); 
-
+var frontendUrl = builder.Configuration.GetValue<string>("FrontendSettings:FrontendUrl");
+Console.WriteLine($"Mongo URI from ENV: {frontendUrl}");
 if (string.IsNullOrEmpty(frontendUrl))
 {
     // Handle the case where frontendUrl is missing
