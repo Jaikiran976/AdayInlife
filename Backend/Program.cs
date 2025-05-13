@@ -32,8 +32,18 @@ builder.Services.Configure<MongoDbSettings>(
 builder.Services.AddSingleton<AppDbContext>();
 
 var config = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
-Console.WriteLine($"Mongo URI from ENV: {(string.IsNullOrEmpty(config?.AtlasURI) ? "Not set" : "Se ")}");
+Console.WriteLine($"Mongo URI from ENV: {config?.AtlasURI}");
 Console.WriteLine($"Mongo DB Name from ENV: {config?.DatabaseName ?? "Not set"}");
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins(frontendUrl)
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
@@ -52,7 +62,8 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins(frontendUrl));
+//app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins(frontendUrl));
+app.UseCors();
 
 app.UseAuthorization();
 
