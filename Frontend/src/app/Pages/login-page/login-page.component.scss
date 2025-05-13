@@ -1,0 +1,19 @@
+.login-page {
+    width: 700px;
+    min-height: 420px;
+    display: flex;
+    margin: auto;
+    margin-top: 180px;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    &__image{
+        width: 50%;
+    }
+
+    &__formwrapper{
+        width: 50%;
+        align-content: center;
+        margin:20px ;
+    }
+}

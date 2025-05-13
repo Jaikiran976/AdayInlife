@@ -1,0 +1,55 @@
+import { Routes } from '@angular/router';
+import { LoginPageComponent } from './Pages/login-page/login-page.component';
+import { HomePageComponent } from './Pages/home-page/home-page.component';
+import { authGuard } from './Guards/auth guard/auth.guard';
+import { loginGuard } from './Guards/login guard/login.guard';
+import { SignInComponent } from './Shared/Components/sign-in/sign-in.component';
+import { SignUpComponent } from './Shared/Components/sign-up/sign-up.component';
+import { ForgotPasswordComponent } from './Shared/Components/forgot-password/forgot-password.component';
+
+export const routes: Routes = [
+    {
+        path: '',
+        redirectTo: "signin",
+        pathMatch: "full"
+    },
+    {
+        path: '',
+        component: LoginPageComponent,
+        canActivate: [loginGuard],
+        children: [
+            {
+                path: '',
+                redirectTo: 'signin',  // Default child route
+                pathMatch: 'full'
+            },
+            {
+                path: "signin",
+                component: SignInComponent
+            },
+            {
+                path: "signup",
+                component: SignUpComponent
+            },
+            {
+                path: "forgotpassword",
+                component: ForgotPasswordComponent
+            }
+        ]
+    },
+    {
+        path: "",
+        component: HomePageComponent,
+        canActivate: [authGuard],
+        children: [
+            {
+                path: "dashboard",
+                component: HomePageComponent
+            }
+        ]
+    },
+    { 
+        path: '**', 
+        redirectTo: 'signin' 
+    } 
+];

@@ -1,0 +1,11 @@
+<div class="dropdown" (click)="toggleDropdown()">
+  <div class="dropdown-selected">{{ selected || placeholder }}</div>
+  <div class="dropdown-options" *ngIf="isOpen">
+    <div *ngFor="let option of options" (click)="selectOption(option, $event)">
+      {{ option }}
+    </div>
+  </div>
+</div>
+<div *ngIf="!isOptionSelected && isTouched" class="validationerror">
+  <small>Please select a option.</small>
+</div>

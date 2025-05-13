@@ -1,0 +1,31 @@
+.dropdown {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .dropdown-selected {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background: #fff;
+  }
+  
+  .dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border: 1px solid #ccc;
+    background: white;
+    z-index: 10;
+  }
+  
+  .dropdown-options div {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .dropdown-options div:hover {
+    background: #f0f0f0;
+  }
+  
