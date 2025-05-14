@@ -33,7 +33,7 @@ namespace Backend.Controllers
                 return Conflict(new { message = "User Email already exists.", user = user });
             }
 
-            //checking if user with same user name exists
+            //checking if user with same username exists
             var userWithSameName = users.FirstOrDefault(i => i.userName == user.userName);
 
             if (userWithSameName != null)
@@ -42,7 +42,8 @@ namespace Backend.Controllers
                 return Conflict(new { message = "Username already exists.", user = user });
             }
 
-            user.password = AesEncryptionHelper.Encrypt(user.password);
+            if(user.password !=null) 
+                user.password = AesEncryptionHelper.Encrypt(user.password);
 
             _context.users.Add(user);
             _context.SaveChanges();
@@ -72,7 +73,7 @@ namespace Backend.Controllers
             }
 
             // Check if the user exists
-            if (userFound != null)
+            if (userFound != null && userFound.password != null)
             {
                 userFound.password = AesEncryptionHelper.Decrypt(userFound.password);
                 if (user.Password == userFound.password)
@@ -173,7 +174,7 @@ namespace Backend.Controllers
             }
 
             // Check if the user exists
-            if (userFound != null)
+            if (userFound != null && user.newPassword != null)
             {
                 userFound.password = AesEncryptionHelper.Encrypt(user.newPassword);
                 _context.SaveChanges();

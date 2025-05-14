@@ -27,11 +27,15 @@ builder.Services.AddSwaggerGen();
 //    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 //Configure mongo db
-var configure = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
+var config = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
 builder.Services.Configure<MongoDbSettings>(
     builder.Configuration.GetSection("MongoDbSettings"));
-builder.Services.AddDbContext<AppDbContext>(options =>
-options.UseMongoDB(configure.AtlasURI,configure.DatabaseName));
+
+if (config != null && config.AtlasURI !=null && config.DatabaseName != null)
+{
+    builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseMongoDB(config.AtlasURI, config.DatabaseName));
+}
 
 //cors setup
 builder.Services.AddCors(options =>
@@ -54,11 +58,11 @@ var app = builder.Build();
 //}
 
 // Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
+if (app.Environment.IsDevelopment())
+{
     app.UseSwagger();
     app.UseSwaggerUI();
-//}
+}
 
 app.UseHttpsRedirection();
 
