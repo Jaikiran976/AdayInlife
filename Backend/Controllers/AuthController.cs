@@ -1,12 +1,9 @@
-﻿using Amazon.Runtime.Internal;
-using Backend.Data;
+﻿using Backend.Data;
 using Backend.Helpers;
 using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MongoDB.Bson;
 using MongoDB.Driver;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Backend.Controllers
 {
@@ -15,30 +12,18 @@ namespace Backend.Controllers
     public class AuthController : ControllerBase
     {
         private readonly AppDbContext _context;
-        ILogger<AuthController> _logger;
 
-        public AuthController(AppDbContext context,ILogger<AuthController> logger)
+        public AuthController(AppDbContext context)
         {
             _context = context;
-            _logger = logger;
-        }
-
-        [HttpGet("my-ip")]
-        public async Task<IActionResult> GetMyIp()
-        {
-            using var httpClient = new HttpClient();
-            var ip = await httpClient.GetStringAsync("https://api.ipify.org");
-            return Ok(new { ip });
         }
 
         //Signing up the user
         [HttpPost("SignUp")]
         public async Task<IActionResult> SignUp([FromBody] SignUp user)
         {
-            //var users = await _context.Users.ToListAsync();
-            //var users = await _context.SignUps.Find(_ => true).ToListAsync();
-            var users = await _context.SignUps.Find(FilterDefinition<SignUp>.Empty).ToListAsync(); // More explicit and cleaner
-            
+            var users = await _context.users.ToListAsync();
+
             //checking if user with same email exists
             var userWithSameEmail = users.FirstOrDefault(i => i.email == user.email);
 
@@ -58,10 +43,9 @@ namespace Backend.Controllers
             }
 
             user.password = AesEncryptionHelper.Encrypt(user.password);
-            await _context.SignUps.InsertOneAsync(user);
-            //_context.Users.Add(user);
-            //_context.ChangeTracker.DetectChanges();
-            //_context.SaveChanges();
+
+            _context.users.Add(user);
+            _context.SaveChanges();
 
             user.password = "";
             // new user is created
@@ -76,8 +60,8 @@ namespace Backend.Controllers
         [HttpPost("SignIn")]
         public async Task<IActionResult> SignIn([FromBody] SignIn user)
         {
-            //var users = await _context.Users.ToListAsync();
-            var users = await _context.SignUps.Find(_ => true).ToListAsync();
+            var users = await _context.users.ToListAsync();
+
             //check with mail first if the user exists
             var userFound = users.FirstOrDefault(i => i.email == user.usernameOrEmail);
 
@@ -114,9 +98,8 @@ namespace Backend.Controllers
         [HttpGet("GetSecurityQuestion")]
         public async Task<IActionResult> GetSecurityQuestion([FromQuery] string usernameOrEmail)
         {
-            _logger.LogInformation("Processing query: {query}", usernameOrEmail);
-            //var users = await _context.Users.ToListAsync();
-            var users = await _context.SignUps.Find(_ => true).ToListAsync();
+            var users = await _context.users.ToListAsync();
+
             //check with mail first if the user exists
             var userFound = users.FirstOrDefault(i => i.email == usernameOrEmail);
 
@@ -142,8 +125,7 @@ namespace Backend.Controllers
         [HttpPost("VerifyAnswer")]
         public async Task<IActionResult> VerifyAnswer([FromBody] ChangePassword user)
         {
-            //var users = await _context.Users.ToListAsync();
-            var users = await _context.SignUps.Find(_ => true).ToListAsync();
+            var users = await _context.users.ToListAsync();
 
             //check with mail first if the user exists
             var userFound = users.FirstOrDefault(i => i.email == user.usernameOrEmail);
@@ -179,8 +161,7 @@ namespace Backend.Controllers
         [HttpPut("ChangeThePassword")]
         public async Task<IActionResult> ChangeThePassword([FromBody] ChangePassword user)
         {
-            //var users = await _context.Users.ToListAsync();
-            var users = await _context.SignUps.Find(_ => true).ToListAsync();
+            var users = await _context.users.ToListAsync();
 
             //check with mail first if the user exists
             var userFound = users.FirstOrDefault(i => i.email == user.usernameOrEmail);
@@ -195,12 +176,7 @@ namespace Backend.Controllers
             if (userFound != null)
             {
                 userFound.password = AesEncryptionHelper.Encrypt(user.newPassword);
-
-                await _context.SignUps.ReplaceOneAsync(
-                    s => s.Id == userFound.Id,
-                    userFound
-                );
-                //_context.SaveChanges();
+                _context.SaveChanges();
 
                 user.newPassword = "";
                 user.securityAnswer = "";

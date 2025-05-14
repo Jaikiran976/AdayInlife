@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseApiUrl:'https://testingapi-akm0.onrender.com'
+  baseApiUrl:'https://localhost:7113'
 };
 
 /*

@@ -15,11 +15,9 @@ if (string.IsNullOrEmpty(frontendUrl))
 }
 
 // Add services to the container.
-builder.Logging.ClearProviders();  // Remove default providers
-builder.Logging.AddConsole();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -29,12 +27,13 @@ builder.Services.AddSwaggerGen();
 //    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 //Configure mongo db
+var configure = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
 builder.Services.Configure<MongoDbSettings>(
     builder.Configuration.GetSection("MongoDbSettings"));
-builder.Services.AddSingleton<AppDbContext>();
+builder.Services.AddDbContext<AppDbContext>(options =>
+options.UseMongoDB(configure.AtlasURI,configure.DatabaseName));
 
-var config = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
-
+//cors setup
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -47,10 +46,11 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+//Uncomment for making migration for sql
 //using (var scope = app.Services.CreateScope())
 //{
 //    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-//    //dbContext.Database.Migrate();  // Automatically applies migrations when the app starts
+//    dbContext.Database.Migrate();  
 //}
 
 // Configure the HTTP request pipeline.
@@ -62,7 +62,6 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-//app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins(frontendUrl));
 app.UseCors();
 
 app.UseAuthorization();

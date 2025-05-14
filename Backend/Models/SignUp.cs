@@ -8,32 +8,19 @@ namespace Backend.Models
     [Collection("users")]
     public class SignUp
     {
-        //public int Id { get; set; }
-
-        //[Required]
-        //public string UserName { get; set; }
-        //[Required]
-        //public string Email { get; set; }
-        //[Required]
-        //public string Password { get; set; }
-        //[Required]
-        //public string securityQuestion { get; set; }
-        //[Required]
-        //public string securityAnswer { get; set; }
-
-        //for mongo
+        //for mongo so change this with bson to int for SQL
         [BsonElement("_Id"), BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         [Required]
-        public string userName { get; set; }
+        public string? userName { get; set; }
         [Required]
-        public string email { get; set; }
+        public string? email { get; set; }
         [Required]
-        public string password { get; set; }
+        public string? password { get; set; }
         [Required]
-        public string securityQuestion { get; set; }
+        public string? securityQuestion { get; set; }
         [Required]
-        public string securityAnswer { get; set; }
+        public string? securityAnswer { get; set; }
     }
 }
