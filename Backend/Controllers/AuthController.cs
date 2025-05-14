@@ -3,6 +3,7 @@ using Backend.Helpers;
 using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Backend.Controllers
@@ -45,7 +46,15 @@ namespace Backend.Controllers
             if(user.password !=null) 
                 user.password = AesEncryptionHelper.Encrypt(user.password);
 
-            _context.users.Add(user);
+            SignUpDbSetup addUser = new SignUpDbSetup();
+
+            addUser.userName = user.userName;
+            addUser.email = user.email;
+            addUser.password = user.password;
+            addUser.securityQuestion = user.securityQuestion;
+            addUser.securityAnswer = user.securityAnswer;
+
+            _context.users.Add(addUser);
             _context.SaveChanges();
 
             user.password = "";

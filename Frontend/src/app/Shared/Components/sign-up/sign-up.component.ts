@@ -15,7 +15,6 @@ import { CommonModule } from '@angular/common';
 export class SignUpComponent {
   signUpObj: SignUpModel =
     {
-      id:"",
       userName: "",
       email: "",
       password: "",

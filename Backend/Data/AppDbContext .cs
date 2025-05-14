@@ -9,14 +9,14 @@ namespace Backend.Data
             : base(options) { }
 
 
-        public DbSet<SignUp> users => Set<SignUp>();
+        public DbSet<SignUpDbSetup> users => Set<SignUpDbSetup>();
 
         //for mongoDB comment out if used with sql
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<SignUp>();
+            modelBuilder.Entity<SignUpDbSetup>();
         }
     }
 }
