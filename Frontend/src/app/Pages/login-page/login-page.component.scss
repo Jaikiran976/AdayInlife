@@ -1,19 +1,83 @@
+@use 'sass:color';
+@use 'colors' as *;
+@use 'breakpoints' as *;
+
 .login-page {
-    width: 700px;
-    min-height: 420px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
+    flex-wrap: wrap;
     margin: auto;
-    margin-top: 180px;
+    max-width: 700px;
     border-radius: 16px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: calc(100% - 40px);
+    min-height: 500px;
+    max-height: fit-content;
+    background-color: $surface-color;
 
-    &__image{
-        width: 50%;
+    .hero {
+        width: 100%;
+        margin: auto;
+
+        @include respond-to(tablet) {
+            width: 50%;
+        }
+
+        .login-Image-wrapper {
+            text-align: center;
+            padding: 40px 24px;
+        }
+
+        .hero-image {
+            max-width: 200px;
+            margin: 0 auto 24px;
+            display: block;
+        }
+
+        .tagline {
+            font-size: 24px;
+            font-weight: 600;
+            color: $text-color;
+            margin-bottom: 12px;
+        }
+
+        .subheading {
+            font-size: 16px;
+            color: $muted-text-color;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
     }
 
-    &__formwrapper{
-        width: 50%;
+    &__formwrapper {
         align-content: center;
-        margin:20px ;
+        margin: auto;
+        width: 100%;
+
+        @include respond-to(tablet) {
+            width: 50%;
+        }
+    }
+}
+
+//dark theme changes
+:host-context([data-theme="dark"]) {
+    .login-page {
+        background-color: $dark-surface-color;
+
+        .hero {
+            .tagline {
+                color: $dark-text-color;
+            }
+
+            .subheading {
+                color: $dark-muted-text-color;
+            }
+        }
     }
 }

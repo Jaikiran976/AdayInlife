@@ -1,1 +1,14 @@
-<p>home-page works!</p>
+<div class="home-page">
+    <div class="nav">
+        <!-- <app-profile></app-profile> -->
+        <app-hamburger></app-hamburger>
+    </div>
+
+    <div>
+        {{username}}
+    </div>
+    <div> {{ today | date:'EEE, dd MMM yyyy' }}</div>
+    <div class="content-wrapper">
+        <router-outlet></router-outlet>
+    </div>
+</div>

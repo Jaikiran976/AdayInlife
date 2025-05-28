@@ -1,16 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.EntityFrameworkCore;
 
-namespace Backend.Models
+namespace Backend.Models.Dtos
 {
-    public class SignUpDbSetup
+    public class SignUpDto
     {
-        //for mongo so change this with bson to int for SQL
-        [BsonId]
-        public ObjectId Id { get; set; }
-
         [Required]
         public string? userName { get; set; }
         [Required]

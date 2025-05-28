@@ -1,0 +1,24 @@
+@use 'sass:color';
+@use 'colors' as *;
+
+.diary-editor {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.preview {
+  margin-top: 16px;
+  border: 1px dashed $muted-text-color;
+  padding: 10px;
+  background-color: $surface-color;
+  color: $text-color;
+  word-wrap: break-word;
+}
+
+:host-context([data-theme="dark"]) {
+  .preview {
+    border: 1px dashed $dark-muted-text-color;
+    background-color: $dark-surface-color;
+    color: $dark-text-color;
+  }
+}

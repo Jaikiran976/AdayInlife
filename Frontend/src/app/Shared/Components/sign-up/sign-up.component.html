@@ -2,62 +2,59 @@
     <div>
         <form #signUpForm="ngForm" class="global-form">
             <div class="input-wrapper">
-                <label for="username">User Name:</label>
-                <input name="username" [(ngModel)]="signUpObj.userName" type="text" required #username="ngModel" minlength="3" placeholder="Enter the Username...">
+                <label for="username">{{text.form.labels.usename}}</label>
+                <input name="username" [(ngModel)]="signUpObj.userName" type="text" #username="ngModel" minlength="3" placeholder={{text.form.placeholders.usename}} required />
                 <div *ngIf="username.invalid && username.touched" class="validationerror">
-                    <small *ngIf="email.errors?.['required']">User name is required.</small>
-                    <small *ngIf="username.errors?.['minlength']">User name must be at least 3 characters long.</small>
+                    <small *ngIf="username.errors?.['required']">{{text.form.errors.required}}</small>
+                    <small *ngIf="username.errors?.['minlength']">{{text.form.errors.minLength(3)}}</small>
                 </div>
             </div>
 
             <div class="input-wrapper">
-                <label for="email">E-mail:</label>
-                <input name="email" [(ngModel)]="signUpObj.email" type="email" required #email="ngModel" [pattern]="emailPattern" placeholder="Enter the Email...">
+                <label for="email">{{text.form.labels.email}}</label>
+                <input name="email" [(ngModel)]="signUpObj.email" type="email" #email="ngModel" [pattern]="emailPattern" placeholder={{text.form.placeholders.email}} required />
                 <div *ngIf="email.invalid && email.touched" class="validationerror">
-                    <small *ngIf="email.errors?.['required']">Email is required.</small>
-                    <small *ngIf="email.errors?.['pattern']">Please enter a valid email address.</small>
+                    <small *ngIf="email.errors?.['required']">{{text.form.errors.required}}</small>
+                    <small *ngIf="email.errors?.['pattern']">{{text.form.errors.emailPattern}}</small>
                   </div>
             </div>
 
             <div class="input-wrapper">
-                <label for="question">Journal Recovery Prompt:</label>
+                <label for="question">{{text.form.labels.securityQuestion}}</label>
                 <app-custom-dropdown
                     name="question"
                     [(ngModel)]="signUpObj.securityQuestion"
-                    [placeholder]="'Choose a prompt you\'ll remember'"
+                    [placeholder]="text.form.placeholders.securityQuestion"
                     [options]="journalQuestions"
                     required>
                 </app-custom-dropdown>
             </div>
 
             <div class="input-wrapper">
-                <label for="answer">Your answer:</label>
-                <input name="answer" placeholder="Enter something memorable..." [(ngModel)]="signUpObj.securityAnswer" type="text" required #securityanswer="ngModel" 
-                minlength="2">
+                <label for="answer">{{text.form.labels.securityAnswer}}</label>
+                <input name="answer" [(ngModel)]="signUpObj.securityAnswer" type="text" #securityanswer="ngModel" 
+                minlength="2" placeholder={{text.form.placeholders.securityAnswer}} required />
                 <div *ngIf="securityanswer.invalid && securityanswer.touched" class="validationerror">
-                    <small *ngIf="securityanswer.errors?.['required']">Your answer is required.</small>
-                    <small *ngIf="securityanswer.errors?.['minlength']">Your answer must be at least 2 characters long.</small>
+                    <small *ngIf="securityanswer.errors?.['required']">{{text.form.errors.required}}</small>
+                    <small *ngIf="securityanswer.errors?.['minlength']">{{text.form.errors.minLength(2)}}</small>
                 </div>
             </div>
 
             <div class="input-wrapper">
-                <label for="password">Password:</label>
-                <input id="password" name="password" type="password" [(ngModel)]="signUpObj.password" required
-                    [pattern]="passwordPattern" #password="ngModel" placeholder="Enter the Password..."/>
+                <label for="password">{{text.form.labels.password}}</label>
+                <input id="password" name="password" type="password" [(ngModel)]="signUpObj.password"
+                    [pattern]="passwordPattern" #password="ngModel" placeholder={{text.form.placeholders.password}} required />
                 <div *ngIf="password.invalid && password.touched" class="validationerror">
-                    <small *ngIf="password.errors?.['required']">Password is required.</small>
-                    <small *ngIf="password.errors?.['minlength']">Password must be at least 6 characters long.</small>
-                    <small *ngIf="password.errors?.['pattern']">
-                        Password must contain at least one lowercase letter, one uppercase letter, one number, and one
-                        special character.
-                    </small>
+                    <small *ngIf="password.errors?.['required']">{{text.form.errors.required}}</small>
+                    <small *ngIf="password.errors?.['minlength']">{{text.form.errors.minLength(6)}}</small>
+                    <small *ngIf="password.errors?.['pattern']">{{text.form.errors.passwordComplexity}}</small>
                 </div>
             </div>
 
-            <button type="button" (click)="SignUp()" [disabled]="signUpForm.invalid">SignUp</button>
+            <button type="button" (click)="SignUp()" [disabled]="signUpForm.invalid">{{text.form.buttons.signup}}</button>
         </form>
     </div>
     <div>
-        Already have a account? <a (click)="showSignIn()" class="link">Sign In</a>
+        Already have a account? <a class="link" tabindex="0" routerLink = '/signin'> {{text.form.buttons.signIn}}</a>
     </div>
 </div>

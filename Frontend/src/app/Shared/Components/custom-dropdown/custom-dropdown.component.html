@@ -1,5 +1,5 @@
-<div class="dropdown" (click)="toggleDropdown()">
-  <div class="dropdown-selected">{{ selected || placeholder }}</div>
+<div class="dropdown" (click)="toggleDropdown()" tabindex="0">
+  <div class="dropdown-selected" [ngClass]="{ 'placeholder': !isOptionSelected }">{{ selected || placeholder }}</div>
   <div class="dropdown-options" *ngIf="isOpen">
     <div *ngFor="let option of options" (click)="selectOption(option, $event)">
       {{ option }}

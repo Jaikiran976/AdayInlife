@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Backend.Models
+namespace Backend.Models.Dtos
 {
-    public class ChangePassword
+    public class ChangePasswordDto
     {
         public string? usernameOrEmail { get; set; }
 

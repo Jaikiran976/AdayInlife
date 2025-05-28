@@ -1,31 +1,111 @@
+@use 'sass:color';
+@use 'colors' as *;
+
 .dropdown {
-    position: relative;
-    cursor: pointer;
-    user-select: none;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 4px;
+}
+
+.dropdown-selected {
+  padding: 4px;
+  border: 1px solid $muted-text-color;
+  background-color: $surface-color;
+  min-height: 24px;
+  align-content: center;
+  width: calc(100% - 10px);
+  border-radius: 4px;
+  font-size: $font-size-sm;
+  line-height: 1.4;
+  color: $text-color;
+
+  &.placeholder {
+    color: $muted-text-color;
   }
-  
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+  }
+
+  &:hover {
+    border-color: $accent-color;
+  }
+}
+
+.dropdown-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 1px solid color.adjust($muted-text-color, $lightness: 40%);
+  background: $bg-color;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  div {
+    padding: 10px;
+    cursor: pointer;
+    font-size: $font-size-sm;
+    color: $text-color;
+
+    &:hover {
+      background: $secondary-color;
+      color: #fff;
+    }
+  }
+}
+
+// Dark theme dropdown styling
+:host-context([data-theme="dark"]) {
   .dropdown-selected {
-    padding: 10px;
-    border: 1px solid #ccc;
-    background: #fff;
+    border: 1px solid $dark-muted-text-color;
+    background-color: $dark-surface-color;
+    color: $dark-text-color;
+
+    &.placeholder {
+      color: $dark-muted-text-color;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $dark-primary-color;
+      box-shadow: 0 0 0 2px rgba($dark-primary-color, 0.3);
+    }
+
+    &:hover {
+      border-color: $dark-accent-color;
+    }
+
+    &:disabled {
+      background-color: color.adjust($dark-surface-color, $lightness: 5%);
+      color: $dark-muted-text-color;
+      border: 1px solid color.adjust($dark-muted-text-color, $lightness: 10%);
+      cursor: not-allowed;
+      opacity: 0.8;
+    }
   }
-  
+
   .dropdown-options {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    border: 1px solid #ccc;
-    background: white;
-    z-index: 10;
+    border: 1px solid color.adjust($dark-muted-text-color, $lightness: -20%);
+    background: $dark-bg-color;
+
+    div {
+      padding: 0.5rem 1rem;
+      color: $dark-text-color;
+      cursor: pointer;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background: color.adjust($dark-secondary-color, $lightness: -20%, $saturation: -10%);
+        color: #fff;
+      }
+
+      &.selected {
+        background-color: $dark-primary-color;
+        color: #fff;
+      }
+    }
   }
-  
-  .dropdown-options div {
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .dropdown-options div:hover {
-    background: #f0f0f0;
-  }
-  
+}

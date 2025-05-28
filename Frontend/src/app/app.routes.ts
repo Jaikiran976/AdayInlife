@@ -6,6 +6,8 @@ import { loginGuard } from './Guards/login guard/login.guard';
 import { SignInComponent } from './Shared/Components/sign-in/sign-in.component';
 import { SignUpComponent } from './Shared/Components/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './Shared/Components/forgot-password/forgot-password.component';
+import { DiaryEntryComponent } from './Shared/Components/diary-entry/diary-entry.component';
+import { AllEntriesComponent } from './Shared/Components/all-entries/all-entries.component';
 
 export const routes: Routes = [
     {
@@ -18,34 +20,18 @@ export const routes: Routes = [
         component: LoginPageComponent,
         canActivate: [loginGuard],
         children: [
-            {
-                path: '',
-                redirectTo: 'signin',  // Default child route
-                pathMatch: 'full'
-            },
-            {
-                path: "signin",
-                component: SignInComponent
-            },
-            {
-                path: "signup",
-                component: SignUpComponent
-            },
-            {
-                path: "forgotpassword",
-                component: ForgotPasswordComponent
-            }
+            { path: "signin", component: SignInComponent },
+            { path: "signup", component: SignUpComponent },
+            { path: "forgotpassword", component: ForgotPasswordComponent }
         ]
     },
     {
-        path: "",
+        path: '',
         component: HomePageComponent,
         canActivate: [authGuard],
         children: [
-            {
-                path: "dashboard",
-                component: HomePageComponent
-            }
+            { path: 'home', component: DiaryEntryComponent },
+            {path:'allentries', component: AllEntriesComponent}
         ]
     },
     { 

@@ -1,6 +1,7 @@
 ﻿using Backend.Data;
 using Backend.Helpers;
-using Backend.Models;
+using Backend.Models.Dtos;
+using Backend.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Bson;
@@ -21,7 +22,7 @@ namespace Backend.Controllers
 
         //Signing up the user
         [HttpPost("SignUp")]
-        public async Task<IActionResult> SignUp([FromBody] SignUp user)
+        public async Task<IActionResult> SignUp([FromBody] SignUpDto user)
         {
             var users = await _context.users.ToListAsync();
 
@@ -46,7 +47,7 @@ namespace Backend.Controllers
             if(user.password !=null) 
                 user.password = AesEncryptionHelper.Encrypt(user.password);
 
-            SignUpDbSetup addUser = new SignUpDbSetup();
+            SignUp addUser = new SignUp();
 
             addUser.userName = user.userName;
             addUser.email = user.email;
@@ -68,7 +69,7 @@ namespace Backend.Controllers
 
         //Signing in the user
         [HttpPost("SignIn")]
-        public async Task<IActionResult> SignIn([FromBody] SignIn user)
+        public async Task<IActionResult> SignIn([FromBody] SignInDto user)
         {
             var users = await _context.users.ToListAsync();
 
@@ -82,7 +83,7 @@ namespace Backend.Controllers
             }
 
             // Check if the user exists
-            if (userFound != null && userFound.password != null)
+            if (userFound != null && userFound.password != null && userFound.userName != null)
             {
                 userFound.password = AesEncryptionHelper.Decrypt(userFound.password);
                 if (user.Password == userFound.password)
@@ -92,7 +93,7 @@ namespace Backend.Controllers
                     {
                         message = "User is present.",
                         user = user,
-                        token = GenerateTokenHelper.GenerateToken() // Return the generated token
+                        token = GenerateTokenHelper.GenerateToken(userFound.userName) // Return the generated token
                     });
                 }
                 else
@@ -133,7 +134,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost("VerifyAnswer")]
-        public async Task<IActionResult> VerifyAnswer([FromBody] ChangePassword user)
+        public async Task<IActionResult> VerifyAnswer([FromBody] ChangePasswordDto user)
         {
             var users = await _context.users.ToListAsync();
 
@@ -169,7 +170,7 @@ namespace Backend.Controllers
         }
 
         [HttpPut("ChangeThePassword")]
-        public async Task<IActionResult> ChangeThePassword([FromBody] ChangePassword user)
+        public async Task<IActionResult> ChangeThePassword([FromBody] ChangePasswordDto user)
         {
             var users = await _context.users.ToListAsync();
 
@@ -199,6 +200,29 @@ namespace Backend.Controllers
             }
 
             return NotFound(new { message = "User not found.", user = user });
+        }
+
+
+
+        [HttpGet("GetUsername")]
+        public async Task<IActionResult> GetUsername([FromQuery] string token)
+        {
+            if (string.IsNullOrEmpty(token))
+                return NotFound(new { message = "User does not exist in database." });
+
+            var username = GenerateTokenHelper.GetUsername(token);
+            if (string.IsNullOrEmpty(username))
+                return NotFound(new { message = "User does not exist in database." });
+
+            var userExists = await _context.users.AnyAsync(u => u.userName == username);
+            if (!userExists)
+                return NotFound(new { message = "User does not exist in database." });
+
+            return Ok(new
+            {
+                message = "User is present.",
+                username = username
+            });
         }
     }
 }

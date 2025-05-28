@@ -1,4 +1,4 @@
-﻿using Backend.Models;
+﻿using Backend.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Data
@@ -9,14 +9,16 @@ namespace Backend.Data
             : base(options) { }
 
 
-        public DbSet<SignUpDbSetup> users => Set<SignUpDbSetup>();
+        public DbSet<SignUp> users => Set<SignUp>();
+        public DbSet<DiaryEntry> diaryEntries => Set<DiaryEntry>();
 
         //for mongoDB comment out if used with sql
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<SignUpDbSetup>();
+            modelBuilder.Entity<SignUp>();
+            modelBuilder.Entity<DiaryEntry>();
         }
     }
 }

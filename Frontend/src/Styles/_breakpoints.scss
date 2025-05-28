@@ -1,0 +1,21 @@
+// Define the breakpoints
+$breakpoint-mobile: 480px;   // Mobile-first
+$breakpoint-tablet: 768px;   // Tablet size
+$breakpoint-desktop: 1024px; // Desktop size
+
+// Mixin to handle different breakpoints
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (min-width: #{$breakpoint-mobile}) {
+      @content;
+    }
+  } @else if $breakpoint == tablet {
+    @media (min-width: #{$breakpoint-tablet}) {
+      @content;
+    }
+  } @else if $breakpoint == desktop {
+    @media (min-width: #{$breakpoint-desktop}) {
+      @content;
+    }
+  }
+}

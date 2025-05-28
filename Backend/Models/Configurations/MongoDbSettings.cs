@@ -1,5 +1,4 @@
-﻿
-namespace Backend.Models
+﻿namespace Backend.Models.Configurations
 {
     public class MongoDbSettings
     {

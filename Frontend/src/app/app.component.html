@@ -1,4 +1,7 @@
-<div class="body-wrapper">
+<div class="body-wrapper" [attr.data-theme]="isDark ? 'dark' : 'light'">
+    <div (click)="toggleTheme()" class="themeChangeButton">
+        theme Change
+    </div>
     <main>
         <router-outlet />
     </main>

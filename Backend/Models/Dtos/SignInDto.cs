@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Backend.Models
+namespace Backend.Models.Dtos
 {
-    public class SignIn
+    public class SignInDto
     {
         [Required]
-        public string? usernameOrEmail { get; set;}
+        public string? usernameOrEmail { get; set; }
         [Required]
         public string? Password { get; set; }
     }

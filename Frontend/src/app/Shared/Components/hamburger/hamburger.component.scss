@@ -1,0 +1,129 @@
+@use 'sass:color';
+@use 'colors' as *;
+@use 'breakpoints' as *;
+
+.hamburger {
+    width: fit-content;
+}
+
+#menu-toggle {
+    display: none;
+}
+
+.menu-icon {
+    width: 30px;
+    height: 22px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    z-index: 999;
+
+    span {
+        background: $text-color;
+        position: absolute;
+        height: 4px;
+        width: 100%;
+        border-radius: 4px;
+        transition: 0.3s ease;
+
+        &:nth-child(1) {
+            top: 0;
+        }
+
+        &:nth-child(2) {
+            top: 9px;
+        }
+
+        &:nth-child(3) {
+            top: 18px;
+        }
+    }
+
+    @include respond-to(tablet) {
+        display: none;
+    }
+}
+
+#menu-toggle:checked+.menu-icon span:nth-child(1) {
+    transform: rotate(45deg);
+    top: 9px;
+}
+
+#menu-toggle:checked+.menu-icon span:nth-child(2) {
+    opacity: 0;
+}
+
+#menu-toggle:checked+.menu-icon span:nth-child(3) {
+    transform: rotate(-45deg);
+    top: 9px;
+}
+
+.menu {
+    display: none;
+    background: $surface-color;
+    padding: 20px;
+
+    a {
+        display: block;
+        padding: 10px 0;
+        color: $text-color;
+        text-decoration: none;
+        border-radius: 4%;
+        font-size: $font-size-base;
+        cursor: pointer;
+
+        &:hover {
+            color: $primary-color;
+        }
+    }
+
+    @include respond-to(tablet) {
+        display: flex;
+        gap: 10px;
+        background: none;
+        padding: 0px;
+
+        a {
+            font-size: $font-size-sm;
+        }
+    }
+}
+
+#menu-toggle:checked~.menu {
+    display: block;
+    top: 40px;
+    position: fixed;
+    right: 20px;
+
+    @include respond-to(tablet) {
+        display: flex;
+        gap: 10px;
+        background: none;
+        padding: 0px;
+        position: relative;
+        right: 0px;
+        top: 0px;
+    }
+}
+
+:host-context([data-theme="dark"]) {
+    .menu-icon span {
+        background: $dark-text-color;
+    }
+
+    .menu {
+        background: $dark-surface-color;
+
+        a {
+            color: $dark-text-color;
+
+            &:hover {
+                color: $dark-primary-color;
+            }
+        }
+    }
+
+    #menu-toggle:checked~.menu {
+        background: $dark-surface-color;
+    }
+}

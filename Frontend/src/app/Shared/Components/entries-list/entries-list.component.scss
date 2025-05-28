@@ -1,0 +1,46 @@
+@use 'colors' as *;
+
+.entrys {
+  display: grid;
+  gap: 30px;
+  margin-top: 40px;
+
+  .entry:last-of-type {
+    margin-bottom: 80px;
+  }
+
+  .entry {
+    width: 70%;
+    height: 200px;
+    background-color: $surface-color;
+    margin: 0 auto;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    word-break: break-word;
+    color: $text-color;
+    font-size: $font-size-base;
+    line-height: 1.5;
+
+    &-wrapper {
+      padding: 24px;
+      font-size: $font-size-sm;
+      line-height: 1.4;
+    }
+  }
+}
+
+/* Dark theme overrides */
+:host-context([data-theme="dark"]) {
+  .entrys {
+    .entry {
+      background-color: $dark-surface-color;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6); // stronger shadow in dark mode
+      color: $dark-text-color;
+      font-size: $font-size-base;
+
+      &-wrapper {
+        font-size: $font-size-sm;
+      }
+    }
+  }
+}

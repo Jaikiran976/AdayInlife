@@ -1,9 +1,9 @@
 using Backend.Data;
 using Microsoft.EntityFrameworkCore;
-using Backend.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using Backend.Models.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 var frontendUrl = builder.Configuration.GetValue<string>("FrontendSettings:FrontendUrl");

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
+import { AppText } from '../../constants/texts';
 
 @Component({
   selector: 'app-login-page',
@@ -9,19 +10,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './login-page.component.scss'
 })
 export class LoginPageComponent {
-  // signIn: boolean = true;
-  // signup: boolean = false;
-  // forgotpassword:boolean =false;
-
-  // showSignUp(){
-  //   this.signIn =false;
-  //   this.signup = true;
-  //   this.forgotpassword =false
-  // }
-
-  // showSignIn(){
-  //   this.signIn = true;
-  //   this.signup = false;
-  //   this.forgotpassword =false
-  // }
+  text = AppText;
 }

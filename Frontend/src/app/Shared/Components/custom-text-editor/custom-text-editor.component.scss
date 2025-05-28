@@ -1,0 +1,124 @@
+@use 'sass:color';
+@use 'colors' as *;
+@use 'breakpoints' as *;
+
+.customToolbar {
+  padding: 4px;
+  border: 1px solid $muted-text-color;
+  background: $surface-color;
+  border-radius: 10px 10px 0 0;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+    color: $text-color;
+    background-color: $bg-color;
+    margin-left: 4px;
+
+    &:hover {
+      background-color: color.adjust($surface-color, $lightness: -5%);
+      border-radius: 4px;
+    }
+
+    i {
+      font-size: 16px;
+      color: $text-color;
+    }
+  }
+}
+
+.custom-editor {
+  width: 100%;
+  height: 300px;
+  margin: 0 auto;
+  min-height: 300px;
+}
+
+::ng-deep .custom-editor {
+  .ql-container {
+    height: 100%;
+    border-radius: 0px 0px 10px 10px;
+    background-color: $bg-color;
+    color: $text-color;
+
+    .ql-editor {
+      border-radius: 0px 0px 10px 10px;
+      background-color: $bg-color;
+      color: $text-color;
+      outline: none;
+
+      &:focus {
+        border: 1px solid $primary-color;
+        box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+      }
+    }
+
+    .ql-tooltip {
+      height: 100%;
+      border-radius: 0px 0px 10px 10px;
+
+      input {
+        height: 100%;
+        background-color: $surface-color;
+        color: $text-color;
+      }
+    }
+  }
+}
+
+:host-context([data-theme="dark"]) {
+  .customToolbar {
+    border: 1px solid $dark-muted-text-color;
+    background: $dark-surface-color;
+
+    button {
+      color: $dark-text-color;
+      background-color: $dark-bg-color;
+
+      &:hover {
+        background-color: color.adjust($dark-surface-color, $lightness: 5%);
+      }
+
+      i {
+        font-size: 16px;
+        color: $dark-text-color;
+      }
+    }
+  }
+
+  ::ng-deep .custom-editor {
+    .ql-container {
+      background-color: $dark-bg-color;
+      color: $dark-text-color;
+
+      .ql-editor {
+        background-color: $dark-bg-color;
+        color: $dark-text-color;
+
+        &::before {
+          color: $dark-text-color;
+        }
+
+        &:focus {
+          border: 1px solid $dark-primary-color;
+          box-shadow: 0 0 0 2px rgba($dark-primary-color, 0.2);
+        }
+      }
+
+      .ql-tooltip {
+        input {
+          background-color: $dark-surface-color;
+          color: $dark-text-color;
+        }
+      }
+    }
+  }
+
+  .preview {
+    border: 1px dashed $dark-muted-text-color;
+    background-color: $dark-surface-color;
+    color: $dark-text-color;
+  }
+}

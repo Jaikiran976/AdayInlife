@@ -1,0 +1,18 @@
+.themeChangeButton{
+    opacity: 0;
+}
+
+.themeChangeButton{
+  position: fixed;
+  z-index: 999;
+  cursor: pointer;
+
+  bottom: 16px;
+  right: 16px; 
+
+  @media (min-width: 1024px) {
+    top: 16px;
+    bottom: auto;
+    right: max(16px, calc(50vw - 720px));
+  }
+}

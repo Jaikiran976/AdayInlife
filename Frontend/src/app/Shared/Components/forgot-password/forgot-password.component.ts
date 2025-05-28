@@ -4,15 +4,19 @@ import { Router } from '@angular/router';
 import { ChangePasswordModel } from '../../../Models/ChangePassword.module';
 import { CommonModule } from '@angular/common';
 import { AuthServiceService } from '../../../Services/AuthServices/auth-service.service';
+import { AppText } from '../../../constants/texts';
 
 @Component({
   selector: 'app-forgot-password',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.scss'
 })
+
 export class ForgotPasswordComponent {
-  changePasswordObj : ChangePasswordModel =
+  text = AppText;
+
+  changePasswordObj: ChangePasswordModel =
     {
       usernameOrEmail: "",
       securityQuestion: "",
@@ -21,29 +25,28 @@ export class ForgotPasswordComponent {
     };
 
   confirmPassword: string = "";
-  reset:boolean = true;
-  answerIt:boolean = false;
-  changePassword:boolean =false;
+  reset: boolean = true;
+  answerIt: boolean = false;
+  changePassword: boolean = false;
 
   route = inject(Router);
   authSrv = inject(AuthServiceService);
-  
+
   fetchQuestion() {
     this.authSrv.getSecurityQuestion(this.changePasswordObj.usernameOrEmail).subscribe({
       next: (params: any) => {
         this.changePasswordObj.securityQuestion = params.question;
-
         this.answerIt = true;
         this.reset = false;
         this.changePassword = false;
       },
       error: (response) => {
-        
+
       }
     });
   }
 
-  checkAnswer(){
+  checkAnswer() {
     this.authSrv.verifyAnswer(this.changePasswordObj).subscribe({
       next: (params: any) => {
         this.answerIt = false;
@@ -51,18 +54,18 @@ export class ForgotPasswordComponent {
         this.changePassword = true;
       },
       error: (response) => {
-        
+
       }
     });
   }
 
-  resetPassword(){
+  resetPassword() {
     this.authSrv.changePassword(this.changePasswordObj).subscribe({
       next: (params: any) => {
         this.showSignIn();
       },
       error: (response) => {
-        
+
       }
     });
   }

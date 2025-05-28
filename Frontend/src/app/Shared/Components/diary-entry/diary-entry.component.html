@@ -1,0 +1,6 @@
+<div class="diary-editor">
+  <app-custom-text-editor [(content)]="newEntry.content" [placeholder]="'Write something important...'"
+    [toolbarId]="'editor1'"></app-custom-text-editor>
+  <button (click)="saveDiary()">Save</button>
+  <div [innerHTML]="getSanitizedHtml(newEntry.content)" class="preview"></div>
+</div>
