@@ -26,7 +26,6 @@ export class HomePageComponent {
 
     this.auth.getUsername(token ? token : "").subscribe({
       next: (params: any) => {
-        console.log(params);
         this.username = params.username;
       },
       error: (response) => {

@@ -35,10 +35,9 @@ export class DiaryEntryComponent {
       token = '';
 
     this.newEntry.token = token;
-    console.log(this.newEntry.content);
+
     this.diarySrv.addNewEntry(this.newEntry).subscribe({
       next: (params: any) => {
-        console.log("its added");
       },
       error: (response) => {
       }
