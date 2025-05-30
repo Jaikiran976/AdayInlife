@@ -1,6 +1,18 @@
 <div class="diary-editor">
-  <app-custom-text-editor [(content)]="newEntry.content" [placeholder]="'Write something important...'"
-    [toolbarId]="'editor1'"></app-custom-text-editor>
-  <button (click)="saveDiary()">Save</button>
-  <div [innerHTML]="getSanitizedHtml(newEntry.content)" class="preview"></div>
+  <app-custom-text-editor [(content)]="JsonContent" [placeholder]="'Write something important...'"
+    [toolbarId]="'editor1'" (contentChange)="onContentChange($event)">
+  </app-custom-text-editor>
+
+  <div class="diary-actions" *ngIf="JsonContent.trim().length > 0">
+    <button class="save-btn" (click)="saveDiary()">💾 Save</button>
+    <button class="toggle-preview-btn" (click)="showPreview = !showPreview">
+      {{ showPreview ? '👁️ Hide Preview' : '👁️ Show Preview' }}
+    </button>
+  </div>
+
+  <div *ngIf="showPreview" class="diary-preview">
+    <h3>Live Preview</h3>
+    <div [innerHTML]="livePreviewHtml" class="preview">
+    </div>
+  </div>
 </div>

@@ -5,42 +5,55 @@ import { HttpClient } from '@angular/common/http';
 import { NewEntry } from '../../../Models/newEntry.module';
 import { DiaryEntriesService } from '../../../Services/DiaryEntryService/diary-entries.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-diary-entry',
   standalone: true,
-  imports: [FormsModule, CustomTextEditorComponent],
+  imports: [FormsModule, CustomTextEditorComponent,CommonModule],
   templateUrl: './diary-entry.component.html',
   styleUrls: ['./diary-entry.component.scss'],
 })
 export class DiaryEntryComponent {
   diarySrv = inject(DiaryEntriesService);
   sanitizer = inject(DomSanitizer);
-  newEntry: NewEntry =
-    {
-      token: '',
-      content: ''
-    };
+  JsonContent: string = '';
+  livePreviewHtml: SafeHtml = ''; // live preview HTML
+   showPreview = false;
+  @Output() contentChange = new EventEmitter<string>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getSanitizedHtml(html: string): SafeHtml {
-    const replaced = html.replace(/&nbsp;/g, ' ');
     return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 
   saveDiary() {
-    var token = sessionStorage.getItem('TokenData');
-    if (token == null)
-      token = '';
+    let token = sessionStorage.getItem('TokenData') || '';
 
-    this.newEntry.token = token;
+    // Replace non-breaking spaces with normal spaces before saving
+    const cleanedContent = this.JsonContent.replace(/&nbsp;/g, ' ');
 
-    this.diarySrv.addNewEntry(this.newEntry).subscribe({
+    const newEntry: NewEntry = {
+      token: token,
+      content: cleanedContent,
+    };
+
+    this.diarySrv.addNewEntry(newEntry).subscribe({
       next: (params: any) => {
+        // handle success
       },
       error: (response) => {
+        // handle error
       }
     });
+  }
+
+  onContentChange(newHtmlContent: string) {
+    // Replace non-breaking spaces with normal spaces for preview only
+    const normalizedHtml = newHtmlContent.replace(/&nbsp;/g, ' ');
+    this.JsonContent = newHtmlContent;  // keep original for save
+    this.livePreviewHtml = this.sanitizer.bypassSecurityTrustHtml(normalizedHtml);
   }
 }

@@ -6,6 +6,12 @@
   margin: 0 auto;
 }
 
+.diary-actions{
+  display: flex;
+  width: fit-content;
+  gap: 10px;
+}
+
 .preview {
   margin-top: 16px;
   border: 1px dashed $muted-text-color;
@@ -13,6 +19,7 @@
   background-color: $surface-color;
   color: $text-color;
   word-wrap: break-word;
+  border-radius: 10px;
 }
 
 :host-context([data-theme="dark"]) {

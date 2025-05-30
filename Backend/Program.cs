@@ -1,9 +1,10 @@
 using Backend.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using MongoDB.Driver;
-using MongoDB.Bson;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using Backend.Models.Configurations;
+using Backend.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 var frontendUrl = builder.Configuration.GetValue<string>("FrontendSettings:FrontendUrl");
@@ -48,6 +49,27 @@ builder.Services.AddCors(options =>
     });
 });
 
+//for JWT auth
+var secretKey = builder.Configuration.GetValue<string>("JWTSettings:SecretKey") ?? throw new Exception("JWT Secret Key is not configured.");
+JwtTokenHelper.SetSecretKey(secretKey);
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = 
+        new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey)),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ClockSkew = TimeSpan.Zero
+    };
+});
+
 var app = builder.Build();
 
 //Uncomment for making migration for sql
@@ -67,6 +89,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

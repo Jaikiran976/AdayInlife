@@ -56,8 +56,19 @@ export class AuthServiceService {
 
   //check if user is already signed in 
   isSignedIn(): boolean {
-    return !!sessionStorage.getItem('TokenData');
+    const token = sessionStorage.getItem('TokenData');
+    if (!token) return false;
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1])); // Decode the payload
+      const isExpired = Date.now() >= payload.exp * 1000;
+      return !isExpired;
+    } catch (e) {
+      // Invalid token structure or base64 decoding failed
+      return false;
+    }
   }
+
 
   //add token to signin the user
   signIn(token: string): void {
@@ -69,9 +80,10 @@ export class AuthServiceService {
     sessionStorage.removeItem('TokenData');
   }
 
-  getUsername(token: string): Observable<string> {
-    return this.http.get<string>(
-      `${this.baseapiurl}/api/auth/GetUsername?token=${token}`
-    );
+  getUsername(): Observable<any> {
+    const token = sessionStorage.getItem('TokenData');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<any>(`${this.baseapiurl}/api/auth/GetUsername`, { headers });
   }
 }

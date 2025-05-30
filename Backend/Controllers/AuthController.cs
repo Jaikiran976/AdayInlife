@@ -2,9 +2,9 @@
 using Backend.Helpers;
 using Backend.Models.Dtos;
 using Backend.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Backend.Controllers
@@ -18,6 +18,15 @@ namespace Backend.Controllers
         public AuthController(AppDbContext context)
         {
             _context = context;
+        }
+
+        //get user if already logged in 
+        [Authorize]
+        [HttpGet("GetUsername")]
+        public IActionResult GetUsername()
+        {
+            var username = User?.Identity?.Name;
+            return Ok(new { username });
         }
 
         //Signing up the user
@@ -93,7 +102,7 @@ namespace Backend.Controllers
                     {
                         message = "User is present.",
                         user = user,
-                        token = GenerateTokenHelper.GenerateToken(userFound.userName) // Return the generated token
+                        token = JwtTokenHelper.GenerateToken(userFound.userName) // Return the generated token
                     });
                 }
                 else
@@ -200,29 +209,6 @@ namespace Backend.Controllers
             }
 
             return NotFound(new { message = "User not found.", user = user });
-        }
-
-
-
-        [HttpGet("GetUsername")]
-        public async Task<IActionResult> GetUsername([FromQuery] string token)
-        {
-            if (string.IsNullOrEmpty(token))
-                return NotFound(new { message = "User does not exist in database." });
-
-            var username = GenerateTokenHelper.GetUsername(token);
-            if (string.IsNullOrEmpty(username))
-                return NotFound(new { message = "User does not exist in database." });
-
-            var userExists = await _context.users.AnyAsync(u => u.userName == username);
-            if (!userExists)
-                return NotFound(new { message = "User does not exist in database." });
-
-            return Ok(new
-            {
-                message = "User is present.",
-                username = username
-            });
         }
     }
 }

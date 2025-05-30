@@ -56,13 +56,32 @@
     }
 
     .ql-tooltip {
-      height: 100%;
-      border-radius: 0px 0px 10px 10px;
+      background-color: $surface-color;
+      border: 1px solid $muted-text-color;
+      padding: 8px;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      z-index: 9999;
+      color: $text-color;
 
       input {
-        height: 100%;
-        background-color: $surface-color;
+        padding: 6px 8px;
+        border: 1px solid $muted-text-color;
+        border-radius: 4px;
+        font-size: 14px;
+        width: 180px;
+        background-color: $bg-color;
         color: $text-color;
+      }
+
+      a {
+        color: $primary-color;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+          color: $accent-color;
+        }
       }
     }
   }
@@ -108,9 +127,22 @@
       }
 
       .ql-tooltip {
+        background-color: $dark-surface-color;
+        border: 1px solid $dark-muted-text-color;
+        color: $dark-text-color;
+
         input {
-          background-color: $dark-surface-color;
+          background-color: $dark-bg-color;
           color: $dark-text-color;
+          border: 1px solid $dark-muted-text-color;
+        }
+
+        a {
+          color: $dark-primary-color;
+
+          &:hover {
+            color: $dark-accent-color;
+          }
         }
       }
     }

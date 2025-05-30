@@ -63,12 +63,11 @@ label {
 
 a.link {
     font-size: $font-size-sm;
-    ;
     position: relative;
     right: 0;
     left: auto;
     margin: 0 0 0 auto;
-    color: color.adjust($primary-color, $lightness: -10%);
+    color: $primary-dark;
     cursor: pointer;
     border-radius: 2%;
     text-decoration: underline;

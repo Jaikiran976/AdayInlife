@@ -27,7 +27,7 @@ namespace Backend.Controllers
             if(entryDto.token ==  null)
                 return NotFound(new { message = "User does not exist in database." });
 
-            var username = GenerateTokenHelper.GetUsername(entryDto.token);
+            var username = JwtTokenHelper.GetUsername(entryDto.token);
 
             var user = await _context.users.FirstOrDefaultAsync(u => u.userName == username);
 
@@ -60,7 +60,7 @@ namespace Backend.Controllers
             if (token == null)
                 return NotFound(new { message = "User does not exist in database." });
 
-            var username = GenerateTokenHelper.GetUsername(token);
+            var username = JwtTokenHelper.GetUsername(token);
 
             var user = await _context.users.FirstOrDefaultAsync(u => u.userName == username);
 

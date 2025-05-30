@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseApiUrl:'https://testingapi-akm0.onrender.com'
+  baseApiUrl:'https://adayinlife.onrender.com'
 };

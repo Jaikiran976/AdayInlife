@@ -22,13 +22,13 @@ export class HomePageComponent {
   }
 
   getUsername() {
-    var token = sessionStorage.getItem('TokenData');
-
-    this.auth.getUsername(token ? token : "").subscribe({
-      next: (params: any) => {
-        this.username = params.username;
+   this.auth.getUsername().subscribe({
+      next: (response: any) => {
+        this.username = response.username;
       },
-      error: (response) => {
+      error: (err) => {
+        console.error('Failed to get username:', err);
+        sessionStorage.removeItem('TokenData');
       }
     });
   }
