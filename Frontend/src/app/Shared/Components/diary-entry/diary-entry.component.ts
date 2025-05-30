@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-diary-entry',
   standalone: true,
-  imports: [FormsModule, CustomTextEditorComponent,CommonModule],
+  imports: [FormsModule, CustomTextEditorComponent, CommonModule],
   templateUrl: './diary-entry.component.html',
   styleUrls: ['./diary-entry.component.scss'],
 })
@@ -19,7 +19,7 @@ export class DiaryEntryComponent {
   sanitizer = inject(DomSanitizer);
   JsonContent: string = '';
   livePreviewHtml: SafeHtml = ''; // live preview HTML
-   showPreview = false;
+  showPreview = false;
   @Output() contentChange = new EventEmitter<string>();
 
   constructor(private http: HttpClient) {

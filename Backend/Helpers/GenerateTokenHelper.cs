@@ -18,6 +18,9 @@ namespace Backend.Helpers
 
         internal static string GenerateToken(string username)
         {
+            if (string.IsNullOrEmpty(SecretKey))
+                throw new InvalidOperationException("SecretKey not set. Call SetSecretKey first.");
+
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(SecretKey);
 
@@ -26,7 +29,7 @@ namespace Backend.Helpers
                 Subject = new ClaimsIdentity(new[] {
                     new Claim(ClaimTypes.Name, username)
                 }),
-                Expires = DateTime.UtcNow.AddHours(2),  // Set token expiry as needed
+                Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
@@ -38,28 +41,39 @@ namespace Backend.Helpers
 
         internal static string? GetUsername(string token)
         {
+            if (string.IsNullOrEmpty(SecretKey))
+                throw new InvalidOperationException("SecretKey not set. Call SetSecretKey first.");
+
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(SecretKey);
 
             try
             {
+                // Remove Bearer prefix if present
+                token = token.Replace("Bearer ", "").Trim();
+
                 tokenHandler.ValidateToken(token, new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,        // If you use issuer, set here
-                    ValidateAudience = false,      // If you use audience, set here
-                    ClockSkew = TimeSpan.Zero      // Optional: no clock skew
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
                 }, out SecurityToken validatedToken);
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
-                var username = jwtToken.Claims.First(x => x.Type == ClaimTypes.Name).Value;
+                var usernameClaim = jwtToken.Claims.FirstOrDefault(c => c.Type == "unique_name");
 
-                return username;
+                if (usernameClaim == null)
+                {
+                    return null;
+                }
+
+                return usernameClaim.Value;
             }
-            catch
+            catch (Exception ex)
             {
-                // Token invalid or expired
+                Console.WriteLine($"Token validation failed: {ex.Message}");
                 return null;
             }
         }
