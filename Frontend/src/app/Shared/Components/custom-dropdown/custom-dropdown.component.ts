@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, ElementRef, forwardRef, HostListener, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -13,16 +13,19 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     multi: true
   }]
 })
-export class CustomDropdownComponent  implements ControlValueAccessor {
+export class CustomDropdownComponent implements ControlValueAccessor {
   @Input() options: string[] = [];
-  @Input() placeholder:string = '';
+  @Input() placeholder: string = '';
+  
   selected: string = 'Select...';
   isOpen = false;
   isTouched = false;
-  isOptionSelected = false; 
+  isOptionSelected = false;
 
   onChange = (value: any) => {};
   onTouched = () => {};
+
+  constructor(private _eref: ElementRef) {}
 
   toggleDropdown() {
     this.isOpen = !this.isOpen;
@@ -36,6 +39,13 @@ export class CustomDropdownComponent  implements ControlValueAccessor {
     this.isOptionSelected = true;
     this.onChange(option);
     this.onTouched();
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickOutside(event: MouseEvent) {
+    if (this.isOpen && !this._eref.nativeElement.contains(event.target)) {
+      this.isOpen = false;
+    }
   }
 
   // ControlValueAccessor methods
@@ -52,6 +62,6 @@ export class CustomDropdownComponent  implements ControlValueAccessor {
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    // Optional: disable dropdown logic
+    // Optional: handle disabled state
   }
 }

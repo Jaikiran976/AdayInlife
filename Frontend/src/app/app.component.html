@@ -1,6 +1,6 @@
 <div class="body-wrapper" [attr.data-theme]="isDark ? 'dark' : 'light'">
-    <div (click)="toggleTheme()" class="themeChangeButton">
-        theme Change
+       <div (click)="toggleTheme()" (keydown.enter)="toggleTheme()" class="themeChangeButton" tabindex="0">
+      <i class="fas" [ngClass]="isDark ? 'fa-moon' : 'fa-sun'"></i>
     </div>
     <main>
         <router-outlet />

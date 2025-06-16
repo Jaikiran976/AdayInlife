@@ -17,7 +17,17 @@ body {
     line-height: 1.5;
 }
 
-input {
+::selection {
+    background: $secondary-color;
+    color: $text-color;
+}
+
+::-moz-selection {
+    background: $secondary-color;
+    color: $text-color;
+}
+
+.custom-input {
     min-height: 24px;
     border-radius: 4px;
     border: 1px solid $muted-text-color;
@@ -78,7 +88,7 @@ a.link {
     }
 }
 
-button {
+.custom-button {
     cursor: pointer;
     min-height: 32px;
     padding: 4px;
@@ -117,17 +127,15 @@ button {
     gap: 8px;
 }
 
-input:focus,
-div:focus,
-button:focus,
-a:focus,
-label:focus {
+.custom-input:focus,
+.custom-button:focus,
+a.link:focus {
     outline-offset: 2px;
     outline: 2px solid color.adjust($primary-color, $lightness: 5%);
 }
 
-input:focus,
-button:focus {
+.custom-input:focus,
+.custom-button:focus {
     border-color: $primary-color;
 }
 
@@ -142,7 +150,17 @@ button:focus {
         color: $dark-text-color;
     }
 
-    input {
+    // ::selection {
+    //     background: $dark-secondary-color;
+    //     color: $dark-text-color; 
+    // }
+
+    // ::-moz-selection {
+    //     background: $dark-secondary-color;
+    //     color: $dark-text-color; 
+    // }
+
+    .custom-input {
         border: 1px solid $dark-muted-text-color;
         background-color: $dark-surface-color;
         color: $dark-text-color;
@@ -176,7 +194,7 @@ button:focus {
         }
     }
 
-    button {
+    .custom-button {
         background-color: $dark-primary-color;
         color: #fff;
         border: none;
@@ -199,16 +217,14 @@ button:focus {
         }
     }
 
-    input:focus,
-    div:focus,
-    button:focus,
-    a:focus,
-    label:focus {
+    .custom-input:focus,
+    .custom-button:focus,
+    a.link:focus {
         outline: 2px solid color.adjust($dark-primary-color, $lightness: 5%);
     }
 
-    input:focus,
-    button:focus {
+    .custom-input:focus,
+    .custom-button:focus {
         border-color: $dark-primary-color;
     }
 }

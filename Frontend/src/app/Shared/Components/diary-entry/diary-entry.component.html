@@ -1,18 +1,46 @@
 <div class="diary-editor">
-  <app-custom-text-editor [(content)]="JsonContent" [placeholder]="'Write something important...'"
-    [toolbarId]="'editor1'" (contentChange)="onContentChange($event)">
-  </app-custom-text-editor>
+  <div class="diary-entry-form">
+    <div class="diary-meta-row">
+      <div class="input-wrapper">
+        <label for="diaryDate">Date:</label>
+        <app-custom-calendar [(selectedDate)]="diaryDate"></app-custom-calendar>
+      </div>
 
-  <div class="diary-actions" *ngIf="JsonContent.trim().length > 0">
-    <button class="save-btn" (click)="saveDiary()">💾 Save</button>
-    <button class="toggle-preview-btn" (click)="showPreview = !showPreview">
-      {{ showPreview ? '👁️ Hide Preview' : '👁️ Show Preview' }}
-    </button>
+      <div class="input-wrapper">
+        <label for="modeOfDay">Mood of the day:</label>
+        <app-custom-dropdown name="modeOfDay" [(ngModel)]="modeOfDay" [options]="moodOptions" [placeholder]="mode"
+          required>
+        </app-custom-dropdown>
+      </div>
+    </div>
+
+    <app-custom-text-editor [(content)]="JsonContent" [placeholder]="'Write something memorable...'"
+      [toolbarId]="'editor1'" (contentChange)="onContentChange($event)">
+    </app-custom-text-editor>
   </div>
 
-  <div *ngIf="showPreview" class="diary-preview">
-    <h3>Live Preview</h3>
-    <div [innerHTML]="livePreviewHtml" class="preview">
+  <div class="diary-actions-preview" *ngIf="(JsonContent?.trim() || '').length > 0">
+
+    <div class="diary-actions">
+      <button class="save-btn custom-button" (click)="saveDiary()">Save</button>
+      <button class="toggle-preview-btn custom-button" (click)="showPreview = !showPreview">
+        {{ showPreview ? 'Hide Preview' : 'Show Preview' }}
+      </button>
+    </div>
+
+    <div *ngIf="showPreview" class="diary-preview-container">
+      <h3 class="live-preview-title">Live Preview</h3>
+      <div class="preview">
+        <div class="preview-meta">
+          <div><strong>Date:</strong> {{ diaryDate | date:'dd MMM yyyy' }}</div>
+          <div><strong>Mood:</strong> {{ modeOfDay || 'Not selected' }}</div>
+        </div>
+
+        <div [innerHTML]="livePreviewHtml" class="preview-content"></div>
+      </div>
     </div>
   </div>
 </div>
+
+
+<div class="save-toast" *ngIf="saveSuccess">✅ Diary entry saved!</div>

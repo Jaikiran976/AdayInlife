@@ -1,0 +1,176 @@
+@use 'colors' as *;
+@use 'sass:color';
+
+.calendar-wrapper {
+  position: relative;
+  width: 240px;
+}
+
+.calendar-input {
+  font-size: $font-size-sm;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    border-color: $primary-color;
+  }
+}
+
+.calendar-popup {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 100%;
+  background: $bg-color;
+  border: 1px solid $muted-text-color;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  user-select: none;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  font-weight: 600;
+  font-size: $font-size-sm;
+  background: $surface-color;
+  border-bottom: 1px solid $muted-text-color;
+  color: $text-color;
+  border-radius: 4px 4px 0 0;
+
+  button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: $font-size-base;
+    color: $text-color;
+    border-radius: 2%;
+
+    &:hover {
+      color: $accent-color;
+    }
+
+    &:focus:not(:hover) {
+      outline-offset: 2px;
+      outline: 2px solid color.adjust($primary-color, $lightness: 5%);
+    }
+
+    &:disabled {
+      color: $muted-text-color;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.calendar-weekdays,
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: $font-size-sm;
+}
+
+.calendar-weekdays div {
+  padding: 6px 0;
+  font-weight: 600;
+  color: $muted-text-color;
+}
+
+.calendar-day {
+  /* Reset button styles */
+  all: unset;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+
+  padding: 8px 0;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  color: $text-color;
+  user-select: none;
+
+  &:hover {
+    background-color: $secondary-color;
+  }
+
+  &.selected {
+    background-color: $primary-color;
+    color: white;
+    font-weight: 700;
+  }
+
+  &.blank {
+    cursor: default;
+    background: transparent;
+  }
+
+  &:focus:not(:hover) {
+    outline-offset: -3px;
+    outline: 2px solid color.adjust($primary-color, $lightness: 5%);
+  }
+
+  &:disabled {
+    background-color: $surface-color;
+    color: $muted-text-color;
+    cursor: not-allowed;
+  }
+}
+
+// Dark theme overrides
+:host-context([data-theme='dark']) {
+  .calendar-popup {
+    background: $dark-bg-color;
+    border: 1px solid $dark-muted-text-color;
+  }
+
+  .calendar-header {
+    background: $dark-surface-color;
+    color: $dark-text-color;
+
+    button {
+      color: $dark-primary-color;
+
+      &:hover {
+        color: $dark-accent-color;
+      }
+
+      &:focus:not(:hover) {
+        outline: 2px solid color.adjust($dark-primary-color, $lightness: 5%);
+      }
+
+      &:disabled {
+        color: $dark-muted-text-color;
+      }
+    }
+  }
+
+  .calendar-weekdays div {
+    color: $dark-muted-text-color;
+  }
+
+  .calendar-day {
+    color: $dark-text-color;
+
+    &:hover {
+      background-color: $dark-secondary-color;
+    }
+
+    &.selected {
+      background-color: $dark-primary-color;
+      color: #fff;
+    }
+
+    &:focus:not(:hover) {
+      outline: 2px solid color.adjust($dark-primary-color, $lightness: 5%);
+    }
+
+    &:disabled {
+      background-color: $dark-surface-color;
+      color: $dark-muted-text-color;
+      cursor: not-allowed;
+    }
+  }
+}

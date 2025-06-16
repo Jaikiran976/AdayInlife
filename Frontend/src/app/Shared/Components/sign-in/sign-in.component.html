@@ -2,8 +2,8 @@
     <div class="form">
         <form #signInForm="ngForm" class="global-form">
             <div class="input-wrapper">
-                <label for="email">{{text.form.labels.usernameOrEmail}}</label>
-                <input id="email" name="email" [(ngModel)]="signInObj.usernameOrEmail" minlength="3"
+                <label for="usernameOremail">{{text.form.labels.usernameOrEmail}}</label>
+                <input id="usernameOremail" name="usernameOremail" class="custom-input" [(ngModel)]="signInObj.usernameOrEmail" minlength="3"
                     #usernameOrEmailInput="ngModel" placeholder={{text.form.placeholders.usernameOrEmail}} required />
                 <div *ngIf="usernameOrEmailInput.invalid && usernameOrEmailInput.touched" class="validationerror">
                     <small *ngIf="usernameOrEmailInput.errors?.['required']">{{text.form.errors.required}}</small>
@@ -13,7 +13,7 @@
 
             <div class="input-wrapper">
                 <label for="password">{{text.form.labels.password}}</label>
-                <input id="password" name="password" type="password" [(ngModel)]="signInObj.password"
+                <input id="password" name="password" type="password" class="custom-input" [(ngModel)]="signInObj.password"
                     [pattern]="passwordPattern" #password="ngModel" placeholder={{text.form.placeholders.password}} required />
                 <div *ngIf="password.invalid && password.touched" class="validationerror">
                     <small *ngIf="password.errors?.['required']">{{text.form.errors.required}}</small>
@@ -24,7 +24,7 @@
 
             <a class="link" tabindex="0" routerLink = "/forgotpassword">Forgot password?</a>
 
-            <button type="button" (click)="signIn()" [disabled]="signInForm.invalid">{{text.form.buttons.signIn}}</button>
+            <button type="button" (click)="signIn()" [disabled]="signInForm.invalid" class="custom-button">{{text.form.buttons.signIn}}</button>
 
             <div *ngIf="signInError">
                 {{ signInError }}

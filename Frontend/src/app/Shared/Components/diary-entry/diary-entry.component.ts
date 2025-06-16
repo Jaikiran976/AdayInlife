@@ -1,59 +1,75 @@
-import { Component, EventEmitter, inject, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CustomTextEditorComponent } from '../custom-text-editor/custom-text-editor.component';
-import { HttpClient } from '@angular/common/http';
-import { NewEntry } from '../../../Models/newEntry.module';
-import { DiaryEntriesService } from '../../../Services/DiaryEntryService/diary-entries.service';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { CustomDropdownComponent } from '../custom-dropdown/custom-dropdown.component';
 import { CommonModule } from '@angular/common';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DiaryEntriesService } from '../../../Services/DiaryEntryService/diary-entries.service';
+import { HttpClient } from '@angular/common/http';
+import { CustomCalendarComponent } from "../custom-calendar/custom-calendar.component";
 
 @Component({
   selector: 'app-diary-entry',
   standalone: true,
-  imports: [FormsModule, CustomTextEditorComponent, CommonModule],
+  imports: [
+    FormsModule,
+    CommonModule,
+    CustomTextEditorComponent,
+    CustomDropdownComponent,
+    CustomCalendarComponent
+  ],
   templateUrl: './diary-entry.component.html',
   styleUrls: ['./diary-entry.component.scss'],
 })
 export class DiaryEntryComponent {
   diarySrv = inject(DiaryEntriesService);
   sanitizer = inject(DomSanitizer);
+
   JsonContent: string = '';
-  livePreviewHtml: SafeHtml = ''; // live preview HTML
+  livePreviewHtml: SafeHtml = '';
   showPreview = false;
+  saveSuccess = false;
+
+  // Set default date as today in yyyy-MM-dd format
+  diaryDate: Date = new Date(); // store Date type, not string
+  modeOfDay: string = '';
+  moodOptions = ['😊 Happy', '😢 Sad', '😄 Excited', '😡 Angry', '😌 Calm'];
+  mode: string = 'Select mood...';
+
   @Output() contentChange = new EventEmitter<string>();
 
-  constructor(private http: HttpClient) {
-  }
-
-  getSanitizedHtml(html: string): SafeHtml {
-    return this.sanitizer.bypassSecurityTrustHtml(html);
-  }
+  constructor(private http: HttpClient) { }
 
   saveDiary() {
-    let token = sessionStorage.getItem('TokenData') || '';
+    const token = sessionStorage.getItem('TokenData') || '';
 
-    // Replace non-breaking spaces with normal spaces before saving
-    const cleanedContent = this.JsonContent.replace(/&nbsp;/g, ' ');
+    const cleanedContent = (this.JsonContent || '').replace(/&nbsp;/g, ' ');
 
-    const newEntry: NewEntry = {
-      token: token,
+    const newEntry = {
+      token,
       content: cleanedContent,
+      mood: this.modeOfDay,
+      date: this.diaryDate?.toISOString() || '',
     };
 
     this.diarySrv.addNewEntry(newEntry).subscribe({
-      next: (params: any) => {
-        // handle success
+      next: () => {
+        this.JsonContent = '';
+        this.modeOfDay = '';
+        this.showPreview = false;
+
+        this.saveSuccess = true;
+        setTimeout(() => this.saveSuccess = false, 2200);
       },
-      error: (response) => {
-        // handle error
-      }
+      error: (err) => {
+        console.error('Error saving diary:', err);
+      },
     });
   }
 
-  onContentChange(newHtmlContent: string) {
-    // Replace non-breaking spaces with normal spaces for preview only
-    const normalizedHtml = newHtmlContent.replace(/&nbsp;/g, ' ');
-    this.JsonContent = newHtmlContent;  // keep original for save
-    this.livePreviewHtml = this.sanitizer.bypassSecurityTrustHtml(normalizedHtml);
+  onContentChange(event: string) {
+    this.JsonContent = event;
+    this.livePreviewHtml = this.sanitizer.bypassSecurityTrustHtml(event);
+    this.contentChange.emit(event);
   }
 }

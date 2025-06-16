@@ -121,9 +121,17 @@
                 color: $dark-primary-color;
             }
         }
+
+        @include respond-to(tablet) {
+            background: none;
+        }
     }
 
     #menu-toggle:checked~.menu {
         background: $dark-surface-color;
+
+         @include respond-to(tablet) {
+            background: none;
+        }
     }
 }

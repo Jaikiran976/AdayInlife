@@ -4,14 +4,45 @@
 .diary-editor {
   max-width: 1000px;
   margin: 0 auto;
+  display: grid;
+  gap: 16px;
+
+  .diary-entry-form {
+    background-color: $surface-color;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: grid;
+    gap: 16px;
+
+    .diary-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: flex-start;
+    }
+  }
 }
 
-.diary-actions{
+.diary-actions {
   display: flex;
   width: fit-content;
   gap: 10px;
 }
 
+@keyframes fadeInDropdown {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Live preview styling with fade-in animation
 .preview {
   margin-top: 16px;
   border: 1px dashed $muted-text-color;
@@ -20,12 +51,94 @@
   color: $text-color;
   word-wrap: break-word;
   border-radius: 10px;
+  opacity: 0;
+  animation: fadeInPreview 0.3s ease forwards;
+
+  .preview-meta {
+    font-size: $font-size-sm;
+    color: $muted-text-color;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  .preview-content {
+    border-top: 1px dashed $muted-text-color;
+    padding-top: 10px;
+    margin-top: 10px;
+  }
 }
 
+@keyframes fadeInPreview {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.save-toast {
+  position: fixed;
+  top: 200px;
+  left: 50%;
+  transform: translateX(-50%) translateY(0); // Start neutral
+  background-color: $primary-color;
+  color: $bg-color;
+  padding: 0.5rem 1.25rem;
+  font-size: $font-size-sm;
+  border-radius: 6px;
+  opacity: 1;
+  z-index: 10000;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeUpOffset 2s ease-in-out forwards;
+  pointer-events: none;
+}
+
+@keyframes fadeUpOffset {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  80% {
+    opacity: 0.8;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+}
+
+// Dark theme overrides
 :host-context([data-theme="dark"]) {
+  .diary-editor {
+    .diary-entry-form {
+      background-color: $dark-surface-color;
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
+    }
+  }
+
   .preview {
     border: 1px dashed $dark-muted-text-color;
     background-color: $dark-surface-color;
+    color: $dark-text-color;
+    animation: fadeInPreview 0.3s ease forwards;
+
+    .preview-meta {
+      color: $dark-muted-text-color;
+    }
+
+    .preview-content {
+      border-top: 1px dashed $dark-muted-text-color;
+    }
+  }
+
+  .save-toast {
+    background-color: $dark-primary-color;
     color: $dark-text-color;
   }
 }

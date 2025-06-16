@@ -8,14 +8,14 @@
   background: $surface-color;
   border-radius: 10px 10px 0 0;
 
-  button {
+  .custom-button {
     display: flex;
     align-items: center;
     justify-content: center;
     min-width: 100px;
     color: $text-color;
     background-color: $bg-color;
-    margin-left: 4px;
+    margin: 4px;
 
     &:hover {
       background-color: color.adjust($surface-color, $lightness: -5%);
@@ -92,7 +92,7 @@
     border: 1px solid $dark-muted-text-color;
     background: $dark-surface-color;
 
-    button {
+    .custom-button {
       color: $dark-text-color;
       background-color: $dark-bg-color;
 

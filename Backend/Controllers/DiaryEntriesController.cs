@@ -5,8 +5,6 @@ using Backend.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Backend.Controllers
 {
     [Route("api/[controller]")]
@@ -41,6 +39,8 @@ namespace Backend.Controllers
 
             addEntry.userName = user.userName;
             addEntry.content = entryDto.content;
+            addEntry.mood = entryDto.mood;
+            addEntry.date = entryDto.date;
 
             _context.diaryEntries.Add(addEntry);
             _context.SaveChanges();
@@ -54,6 +54,7 @@ namespace Backend.Controllers
             });
         }
 
+        //get all entries
         [HttpGet("GetAllEntries")]
         public async Task<IActionResult> GetAllEntries([FromQuery] string token)
         {

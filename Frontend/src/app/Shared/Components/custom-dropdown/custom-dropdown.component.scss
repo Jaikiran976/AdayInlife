@@ -6,6 +6,11 @@
   cursor: pointer;
   user-select: none;
   border-radius: 4px;
+  
+  &:focus {
+    outline-offset: 2px;
+    outline: 2px solid color.adjust($primary-color, $lightness: 5%);
+  }
 }
 
 .dropdown-selected {
@@ -22,11 +27,6 @@
 
   &.placeholder {
     color: $muted-text-color;
-  }
-
-  &:focus {
-    outline: none;
-    border-color: $primary-color;
   }
 
   &:hover {
@@ -59,6 +59,12 @@
 
 // Dark theme dropdown styling
 :host-context([data-theme="dark"]) {
+  .dropdown{
+    &:focus {
+      outline: 2px solid color.adjust($dark-primary-color, $lightness: 5%);
+    }
+  }
+
   .dropdown-selected {
     border: 1px solid $dark-muted-text-color;
     background-color: $dark-surface-color;
@@ -67,13 +73,7 @@
     &.placeholder {
       color: $dark-muted-text-color;
     }
-
-    &:focus {
-      outline: none;
-      border-color: $dark-primary-color;
-      box-shadow: 0 0 0 2px rgba($dark-primary-color, 0.3);
-    }
-
+    
     &:hover {
       border-color: $dark-accent-color;
     }

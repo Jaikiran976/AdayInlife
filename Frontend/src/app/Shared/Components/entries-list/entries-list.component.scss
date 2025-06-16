@@ -1,4 +1,5 @@
 @use 'colors' as *;
+@use 'sass:color';
 
 .entrys {
   display: grid;
@@ -26,6 +27,45 @@
       font-size: $font-size-sm;
       line-height: 1.4;
     }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-weight: 600;
+      font-size: $font-size-sm;
+      color: $text-color;
+
+      .entry-meta {
+        span {
+          margin-right: 8px;
+        }
+      }
+
+      .entry-actions {
+        button {
+          background: none;
+          border: none;
+          cursor: pointer;
+          font-size: 1.2rem;
+          margin-left: 10px;
+          padding: 4px 8px;
+          border-radius: 4px;
+          transition: background-color 0.2s ease;
+
+          &:hover {
+            background-color: color.adjust($surface-color, $lightness: -15%);
+          }
+        }
+      }
+    }
+
+    .entry-content {
+      white-space: pre-wrap; // preserve line breaks
+      font-size: $font-size-base;
+      color: $text-color;
+    }
   }
 }
 
@@ -34,12 +74,23 @@
   .entrys {
     .entry {
       background-color: $dark-surface-color;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6); // stronger shadow in dark mode
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
       color: $dark-text-color;
-      font-size: $font-size-base;
 
       &-wrapper {
         font-size: $font-size-sm;
+      }
+
+      .entry-header {
+        color: $dark-text-color;
+
+        .entry-actions button:hover {
+          background-color: color.adjust($dark-surface-color, $lightness: 15%);
+        }
+      }
+
+      .entry-content {
+        color: $dark-text-color;
       }
     }
   }

@@ -1,0 +1,25 @@
+<div class="calendar-wrapper">
+  <input readonly id="diaryDate" [value]="selectedDateString" (click)="toggleCalendar()" class="calendar-input custom-input"
+    placeholder="Select date" />
+
+  <div *ngIf="showCalendar" class="calendar-popup">
+    <div class="calendar-header">
+      <button (click)="prevYear()">&lt;&lt;</button>
+      <button (click)="prevMonth()">&lt;</button>
+      <div>{{ months[currentMonth] }} {{ currentYear }}</div>
+      <button (click)="nextMonth()" [disabled]="isNextMonthDisabled()">&gt;</button>
+      <button (click)="nextYear()" [disabled]="isNextMonthDisabled()">&gt;&gt;</button>
+    </div>
+
+    <div class="calendar-weekdays">
+      <div *ngFor="let day of weekdays">{{ day }}</div>
+    </div>
+    <div class="calendar-days">
+      <div *ngFor="let blank of blanks" class="calendar-day blank"></div>
+      <button *ngFor="let day of daysInMonth" class="calendar-day" [class.selected]="isSelected(day)"
+        (click)="selectDate(day)" [disabled]="isFutureDate(day)">
+        {{ day }}
+      </button>
+    </div>
+  </div>
+</div>

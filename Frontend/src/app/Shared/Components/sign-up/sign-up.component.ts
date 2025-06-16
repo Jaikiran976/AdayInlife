@@ -9,7 +9,7 @@ import { AppText } from '../../../constants/texts';
 
 @Component({
   selector: 'app-sign-up',
-  imports: [FormsModule, CustomDropdownComponent, CommonModule,RouterModule],
+  imports: [FormsModule, CustomDropdownComponent, CommonModule, RouterModule],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss'
 })

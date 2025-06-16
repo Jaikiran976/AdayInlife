@@ -1,18 +1,39 @@
-.themeChangeButton{
-    opacity: 0;
+@use 'colors' as *;
+@use 'sass:color';
+
+.themeChangeButton {
+  position: fixed;
+  bottom: 10rem;
+  right: max(1rem, calc((100vw - 1200px) / 2 + 1rem));
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: $surface-color;
+  border: 1px solid color.adjust($text-color, $alpha: -0.8);
+  backdrop-filter: blur(10px);
+  color: $text-color;
+  font-weight: 500;
+  cursor: pointer;
+  z-index: 9999;
+  transition: background 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background: color.adjust($surface-color, $lightness: -15%);
+  }
 }
 
-.themeChangeButton{
-  position: fixed;
-  z-index: 999;
-  cursor: pointer;
+/* Dark theme override */
+[data-theme="dark"] {
+  .themeChangeButton {
+    background-color: $dark-surface-color;
+    border: 1px solid color.adjust($dark-text-color, $alpha: -0.8);
+    color: $dark-text-color;
 
-  bottom: 16px;
-  right: 16px; 
-
-  @media (min-width: 1024px) {
-    top: 16px;
-    bottom: auto;
-    right: max(16px, calc(50vw - 720px));
+    &:hover {
+      background: color.adjust($dark-surface-color, $lightness: 15%);
+    }
   }
 }
