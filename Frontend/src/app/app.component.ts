@@ -4,7 +4,7 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,CommonModule],
+  imports: [RouterOutlet, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -12,7 +12,13 @@ export class AppComponent {
   title = 'Frontend';
   isDark = false;
 
-  toggleTheme(){
+  ngOnInit() {
+    const stored = localStorage.getItem('darkMode');
+    this.isDark = stored === 'true';
+  }
+
+  toggleTheme() {
     this.isDark = !this.isDark
+    localStorage.setItem('darkMode', this.isDark ? 'true' : 'false');
   }
 }
