@@ -70,6 +70,11 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+//for encrpty key
+var encryptionKey = builder.Configuration.GetValue<string>("EncryptionSettings:ENCRYPTION_KEY") ?? throw new Exception("ENCRYPTION_KEY missing or invalid length");
+var encryptionIv = builder.Configuration.GetValue<string>("EncryptionSettings:ENCRYPTION_IV") ?? throw new Exception("ENCRYPTION_IV missing or invalid length");
+AesEncryptionHelper.SetSecretKey(encryptionKey, encryptionIv);
+
 var app = builder.Build();
 
 //Uncomment for making migration for sql

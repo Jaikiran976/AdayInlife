@@ -18,6 +18,23 @@ namespace Backend.Controllers
         public AuthController(AppDbContext context)
         {
             _context = context;
+
+            var users = _context.users.ToList();
+
+            foreach (var user in users)
+            {
+                if (user.password != null)
+                {
+                    user.password = AesEncryptionHelper.Encrypt(AesEncryptionHelper.Decrypt(user.password));
+                }
+
+                if (user.securityAnswer != null)
+                {
+                    user.securityAnswer = AesEncryptionHelper.Encrypt(user.securityAnswer);
+                }
+            }
+
+            _context.SaveChanges();
         }
 
         //get user if already logged in 
@@ -55,6 +72,9 @@ namespace Backend.Controllers
 
             if(user.password !=null) 
                 user.password = AesEncryptionHelper.Encrypt(user.password);
+
+            if(user.securityAnswer != null) 
+                user.securityAnswer = AesEncryptionHelper.Encrypt(user.securityAnswer);
 
             SignUp addUser = new SignUp();
 
@@ -155,11 +175,14 @@ namespace Backend.Controllers
             {
                 userFound = users.FirstOrDefault(i => i.userName == user.usernameOrEmail);
             }
-
+    
             // Check if the user exists
             if (userFound != null)
             {
-                if(user.securityAnswer == userFound.securityAnswer)
+                if(user.securityAnswer != null) 
+                    user.securityAnswer = AesEncryptionHelper.Encrypt(user.securityAnswer);
+
+                if (user.securityAnswer == userFound.securityAnswer)
                 {
                     user.securityAnswer = "";
                     return Ok(new

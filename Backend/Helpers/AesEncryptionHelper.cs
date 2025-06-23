@@ -5,8 +5,15 @@ namespace Backend.Helpers
 {
     internal static class AesEncryptionHelper
     {
-        private static readonly string _key = "12345678901234567890123456789012"; // 32 ASCII chars
-        private static readonly string _iv = "1234567890123456";
+        private static string _key = string.Empty;
+        private static string _iv = string.Empty;
+        // This secret key should be stored securely in appsettings or environment variables!
+
+        public static void SetSecretKey(string key,string iv)
+        {
+            _key = key;
+            _iv = iv;
+        }
 
         internal static string Encrypt(string plainText)
         {
