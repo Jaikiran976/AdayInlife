@@ -19,22 +19,17 @@ namespace Backend.Controllers
         {
             _context = context;
 
-            var users = _context.users.ToList();
+            //var users = _context.users.ToList();
 
-            foreach (var user in users)
-            {
-                if (user.password != null)
-                {
-                    user.password = AesEncryptionHelper.Encrypt(AesEncryptionHelper.Decrypt(user.password));
-                }
+            //foreach (var user in users)
+            //{
+            //    if (user.password != null)
+            //    {
+            //        user.password = AesEncryptionHelper.Encrypt(AesEncryptionHelper.Decrypt(user.password));
+            //    }
+            //}
 
-                if (user.securityAnswer != null)
-                {
-                    user.securityAnswer = AesEncryptionHelper.Encrypt(user.securityAnswer);
-                }
-            }
-
-            _context.SaveChanges();
+            //_context.SaveChanges();
         }
 
         //get user if already logged in 

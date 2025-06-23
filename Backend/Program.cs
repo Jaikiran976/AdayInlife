@@ -8,7 +8,7 @@ using Backend.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 var frontendUrl = builder.Configuration.GetValue<string>("FrontendSettings:FrontendUrl");
-Console.WriteLine(frontendUrl);
+
 if (string.IsNullOrEmpty(frontendUrl))
 {
     // Handle the case where frontendUrl is missing
@@ -85,11 +85,11 @@ var app = builder.Build();
 //}
 
 // Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
+if (app.Environment.IsDevelopment())
+{
     app.UseSwagger();
     app.UseSwaggerUI();
-//}
+}
 
 app.UseHttpsRedirection();
 
