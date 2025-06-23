@@ -2,6 +2,10 @@
 @use 'colors' as *;
 @use 'sass:color';
 
+* {
+    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+}
+
 body {
     margin: 0px;
     height: 100%;
@@ -10,11 +14,12 @@ body {
 .body-wrapper {
     width: 100%;
     min-height: 100vh;
-    background: $bg-color;
+    background-color: $surface-color;
     color: $text-color;
     font-family: 'Inter', sans-serif;
     font-size: $font-size-base;
     line-height: 1.5;
+    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
 }
 
 ::selection {
@@ -141,13 +146,14 @@ a.link:focus {
 
 //dark theme changes
 [data-theme="dark"] {
-    body {
-        background: $dark-bg-color;
+    * {
+        transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
     }
 
     &.body-wrapper {
-        background: $dark-bg-color;
+        background-color: $dark-surface-color;
         color: $dark-text-color;
+        transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
     }
 
     // ::selection {

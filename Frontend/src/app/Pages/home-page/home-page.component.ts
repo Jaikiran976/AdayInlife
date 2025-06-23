@@ -18,7 +18,7 @@ export class HomePageComponent {
   today: Date = new Date();
 
   constructor() {
-    //this.getUsername();
+    this.getUsername();
   }
 
   getUsername() {
