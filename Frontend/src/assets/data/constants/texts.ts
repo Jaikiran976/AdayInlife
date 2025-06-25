@@ -31,7 +31,8 @@ export const AppText = {
         },
         buttons: {
             signup: 'Create Account',
-            signIn: 'Sign In'
+            signIn: 'Sign In',
+            signInLoading: 'Signing in'
         }
     },
 

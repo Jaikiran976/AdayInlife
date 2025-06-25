@@ -4,11 +4,11 @@ import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthServiceService } from '../../../Services/AuthServices/auth-service.service';
 import { CommonModule } from '@angular/common';
-import { AppText } from '../../../constants/texts';
+import { AppText } from '../../../../assets/data/constants/texts';
 
 @Component({
   selector: 'app-sign-in',
-  imports: [FormsModule, CommonModule, RouterModule ],
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.scss'
 })
@@ -23,6 +23,7 @@ export class SignInComponent {
     };
 
   signInError: string = "";
+  isLoading: boolean = false;
   passwordPattern = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z0-9]).{6,}$';
 
   route = inject(Router);
@@ -30,10 +31,14 @@ export class SignInComponent {
 
   //Sign In to the site
   signIn() {
+    this.signInError = '';
+    this.isLoading = true;
+
     this.authSrv.signInTheUser(this.signInObj).subscribe({
       next: (params: any) => {
         this.authSrv.signIn(params.token);
         this.route.navigateByUrl('/home');
+        this.isLoading = false;
       },
       error: (response) => {
         if (response.status === 404) {
@@ -43,6 +48,7 @@ export class SignInComponent {
         } else {
           this.signInError = 'Login failed. Please try again later.';
         }
+        this.isLoading = false;
       }
     });
   }

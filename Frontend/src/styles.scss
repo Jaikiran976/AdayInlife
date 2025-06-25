@@ -53,6 +53,14 @@ body {
     &:hover {
         border-color: $primary-color;
     }
+
+    &:disabled {
+        background-color: color.adjust($surface-color, $lightness: -5%);
+        color: color.adjust($muted-text-color, $lightness: 15%);
+        border-color: color.adjust($muted-text-color, $lightness: 10%);
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
 }
 
 label {
@@ -144,6 +152,70 @@ a.link:focus {
     border-color: $primary-color;
 }
 
+.error-message {
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: $error-color;
+    text-align: center;
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.spinner {
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-top: 2px solid $text-color;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.dot-loader {
+    display: inline-block;
+    width: 1em; // Reserve width so text doesn't shift
+    text-align: left;
+    margin-left: 2px;
+    position: relative;
+}
+
+.dot-loader::after {
+    content: '...';
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: bottom;
+    width: 0;
+    animation: dots-reveal 1.2s steps(3, end) infinite;
+    transform: scale(1.3);
+}
+
+@keyframes dots-reveal {
+    0% {
+        width: 0
+    }
+
+    33% {
+        width: 0.33em
+    }
+
+    66% {
+        width: 0.66em
+    }
+
+    100% {
+        width: 1em
+    }
+}
+
 //dark theme changes
 [data-theme="dark"] {
     * {
@@ -180,9 +252,10 @@ a.link:focus {
         }
 
         &:disabled {
-            background-color: $dark-surface-color;
-            color: $dark-muted-text-color;
-            cursor: not-allowed;
+            background-color: color.adjust($dark-surface-color, $lightness: 5%);
+            color: color.adjust($dark-muted-text-color, $lightness: -10%);
+            border-color: color.adjust($dark-muted-text-color, $lightness: -10%);
+            opacity: 0.6;
         }
     }
 
@@ -232,5 +305,14 @@ a.link:focus {
     .custom-input:focus,
     .custom-button:focus {
         border-color: $dark-primary-color;
+    }
+
+    .error-message {
+        color: $dark-error-color;
+    }
+
+    .spinner {
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-top: 2px solid $dark-text-color;
     }
 }

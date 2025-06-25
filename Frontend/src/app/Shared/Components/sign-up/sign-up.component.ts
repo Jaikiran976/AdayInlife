@@ -5,7 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthServiceService } from '../../../Services/AuthServices/auth-service.service';
 import { CustomDropdownComponent } from '../custom-dropdown/custom-dropdown.component';
 import { CommonModule } from '@angular/common';
-import { AppText } from '../../../constants/texts';
+import { AppText } from '../../../../assets/data/constants/texts';
 
 @Component({
   selector: 'app-sign-up',

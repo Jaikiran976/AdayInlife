@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ChangePasswordModel } from '../../../Models/ChangePassword.module';
 import { CommonModule } from '@angular/common';
 import { AuthServiceService } from '../../../Services/AuthServices/auth-service.service';
-import { AppText } from '../../../constants/texts';
+import { AppText } from '../../../../assets/data/constants/texts';
 
 @Component({
   selector: 'app-forgot-password',
