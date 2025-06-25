@@ -1,11 +1,17 @@
-<div class="dropdown" (click)="toggleDropdown()" tabindex="0">
-  <div class="dropdown-selected" [ngClass]="{ 'placeholder': !isOptionSelected }">{{ selected || placeholder }}</div>
-  <div class="dropdown-options" *ngIf="isOpen">
-    <div *ngFor="let option of options" (click)="selectOption(option, $event)">
+<div class="dropdown" tabindex="0" (click)="toggleDropdown()" [attr.aria-expanded]="isOpen"
+  [attr.aria-disabled]="disabled" role="combobox" aria-haspopup="listbox"
+  [attr.aria-activedescendant]="focusedOptionIndex > -1 ? 'option-' + focusedOptionIndex : null">
+  <div class="dropdown-selected" [ngClass]="{ 'placeholder': !isOptionSelected, 'disabled': disabled }">
+    {{ selected || placeholder }}
+  </div>
+  <div class="dropdown-options" *ngIf="isOpen" role="listbox">
+    <div *ngFor="let option of options; let i = index" id="{{'option-' + i}}" (click)="selectOption(option, $event)"
+      [class.focused]="i === focusedOptionIndex" role="option" [attr.aria-selected]="selected === option" tabindex="-1">
       {{ option }}
     </div>
   </div>
 </div>
+
 <div *ngIf="!isOptionSelected && isTouched" class="validationerror">
-  <small>Please select a option.</small>
+  <small>Please select an option.</small>
 </div>

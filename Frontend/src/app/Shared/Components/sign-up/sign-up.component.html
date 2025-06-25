@@ -26,7 +26,7 @@
             <div class="input-wrapper">
                 <label for="question">{{text.form.labels.securityQuestion}}</label>
                 <app-custom-dropdown name="question" [(ngModel)]="signUpObj.securityQuestion"
-                    [placeholder]="text.form.placeholders.securityQuestion" [options]="journalQuestions" required>
+                    [placeholder]="text.form.placeholders.securityQuestion" [disabled]="isLoading" [options]="journalQuestions" required>
                 </app-custom-dropdown>
             </div>
 

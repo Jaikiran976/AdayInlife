@@ -2,10 +2,6 @@
 @use 'colors' as *;
 @use 'sass:color';
 
-* {
-    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
-}
-
 body {
     margin: 0px;
     height: 100%;
@@ -19,7 +15,6 @@ body {
     font-family: 'Inter', sans-serif;
     font-size: $font-size-base;
     line-height: 1.5;
-    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
 }
 
 ::selection {
@@ -218,14 +213,9 @@ a.link:focus {
 
 //dark theme changes
 [data-theme="dark"] {
-    * {
-        transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
-    }
-
     &.body-wrapper {
         background-color: $dark-surface-color;
         color: $dark-text-color;
-        transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
     }
 
     // ::selection {

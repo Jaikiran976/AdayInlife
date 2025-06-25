@@ -6,7 +6,7 @@
   cursor: pointer;
   user-select: none;
   border-radius: 4px;
-  
+
   &:focus {
     outline-offset: 2px;
     outline: 2px solid color.adjust($primary-color, $lightness: 5%);
@@ -32,6 +32,14 @@
   &:hover {
     border-color: $accent-color;
   }
+
+  &.disabled {
+    background-color: color.adjust($surface-color, $lightness: -5%);
+    color: color.adjust($muted-text-color, $lightness: 15%);
+    border-color: color.adjust($muted-text-color, $lightness: 10%);
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
 }
 
 .dropdown-options {
@@ -53,12 +61,18 @@
     &:hover {
       background: $secondary-color;
     }
+
+    &.focused {
+      background-color: $accent-color;
+      color: white;
+      transition: none;
+    }
   }
 }
 
 // Dark theme dropdown styling
 :host-context([data-theme="dark"]) {
-  .dropdown{
+  .dropdown {
     &:focus {
       outline: 2px solid color.adjust($dark-primary-color, $lightness: 5%);
     }
@@ -72,17 +86,16 @@
     &.placeholder {
       color: $dark-muted-text-color;
     }
-    
+
     &:hover {
       border-color: $dark-accent-color;
     }
 
-    &:disabled {
+    &.disabled {
       background-color: color.adjust($dark-surface-color, $lightness: 5%);
-      color: $dark-muted-text-color;
-      border: 1px solid color.adjust($dark-muted-text-color, $lightness: 10%);
-      cursor: not-allowed;
-      opacity: 0.8;
+      color: color.adjust($dark-muted-text-color, $lightness: -10%);
+      border-color: color.adjust($dark-muted-text-color, $lightness: -10%);
+      opacity: 0.6;
     }
   }
 
@@ -103,6 +116,11 @@
 
       &.selected {
         background-color: $dark-primary-color;
+        color: #fff;
+      }
+
+      &.focused {
+        background-color: $dark-accent-color;
         color: #fff;
       }
     }
