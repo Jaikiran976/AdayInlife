@@ -36,17 +36,29 @@ export class SignUpComponent {
   //patterns
   passwordPattern = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z0-9]).{6,}$';
   emailPattern = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$';
+  isLoading: boolean = false;
+  signUpError: string = "";
 
   route = inject(Router);
   authSrv = inject(AuthServiceService);
 
   SignUp() {
+    this.signUpError = '';
+    this.isLoading = true;
+
     this.authSrv.signUpTheUser(this.signUpObj).subscribe({
       next: (params: any) => {
         this.route.navigateByUrl('/signin');
+        this.isLoading = true;
       },
       error: (response) => {
+        if (response.status === 409) {
+          this.signUpError = response.error.message;
+        } else {
+          this.signUpError = 'Sign-Up failed. Please try again later.';
+        }
 
+        this.isLoading = false;
       }
     });
   }

@@ -53,7 +53,7 @@ namespace Backend.Controllers
             if (userWithSameEmail != null)
             {
                 user.password = "";
-                return Conflict(new { message = "User Email already exists.", user = user });
+                return Conflict(new { message = "An account with this Email already exists.", user = user });
             }
 
             //checking if user with same username exists
@@ -62,7 +62,7 @@ namespace Backend.Controllers
             if (userWithSameName != null)
             {
                 user.password = "";
-                return Conflict(new { message = "Username already exists.", user = user });
+                return Conflict(new { message = "An account with this Username already exists.", user = user });
             }
 
             if(user.password !=null) 
