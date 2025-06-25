@@ -1,18 +1,18 @@
 
 export const AppText = {
-    hero:{
+    hero: {
         tagline: 'Collect the days that make you, you.',
         subheading: 'Your personal diary to write, reflect, and remember — one day at a time.'
     },
-    
+
     form: {
-        labels:{
+        labels: {
             usename: 'User Name :',
             email: 'E-mail :',
             securityQuestion: 'Journal Recovery Prompt :',
             securityAnswer: 'Your answer :',
             password: 'Password :',
-            usernameOrEmail : 'Username or Email :',
+            usernameOrEmail: 'Username or Email :',
         },
         placeholders: {
             usename: 'Enter the Username...',
@@ -20,7 +20,7 @@ export const AppText = {
             securityQuestion: 'Choose a prompt you\'ll remember',
             securityAnswer: 'Enter something memorable...',
             password: 'Enter the Password...',
-            usernameOrEmail : 'Enter a Username or Email...',
+            usernameOrEmail: 'Enter a Username or Email...',
         },
         errors: {
             required: 'This field is required.',
@@ -34,9 +34,16 @@ export const AppText = {
             signUpLoading: 'Signing up',
             signIn: 'Sign In',
             signInLoading: 'Signing in',
+            fetchQuestion: 'Find Account',
+            fetchQuestionLoading:'Finding',
+            checkAnswer: 'Check Answer',
+            checkAnswerLoading: 'Checking',
+            resetPassword: 'Reset Password',
+            resetPasswordLoading: 'Changing'
         },
-        sucessMessages:{
-            signedUp: '✅ Signed up successfully.'
+        sucessMessages: {
+            signedUp: '✅ Signed up successfully.',
+            changedPassword: '✅ Password changed successfully!'
         }
     },
 
@@ -53,11 +60,11 @@ export const AppText = {
         avatarPicker: 'Choose Your Avatar'
     },
 
-    textEditor:{
+    textEditor: {
         placeholder: 'Enter the text...'
     },
 
-    sucessMessages:{
+    sucessMessages: {
         entrySaved: '✅ Diary entry saved!'
     }
 }

@@ -42,7 +42,7 @@ export class SignInComponent {
       },
       error: (response) => {
         if (response.status === 404) {
-          this.signInError = 'User not found. Please check your credentials.';
+          this.signInError = 'Account not found. Please check your username or email.';
         } else if (response.status === 401) {
           this.signInError = 'Invalid credentials';
         } else {
