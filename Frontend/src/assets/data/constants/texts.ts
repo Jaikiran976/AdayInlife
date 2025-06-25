@@ -55,5 +55,9 @@ export const AppText = {
 
     textEditor:{
         placeholder: 'Enter the text...'
+    },
+
+    sucessMessages:{
+        entrySaved: '✅ Diary entry saved!'
     }
 }

@@ -6,6 +6,7 @@ import { AuthServiceService } from '../../../Services/AuthServices/auth-service.
 import { CustomDropdownComponent } from '../custom-dropdown/custom-dropdown.component';
 import { CommonModule } from '@angular/common';
 import { AppText } from '../../../../assets/data/constants/texts';
+import { ToastService } from '../../../Services/ToastServices/toast.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -41,6 +42,7 @@ export class SignUpComponent {
 
   route = inject(Router);
   authSrv = inject(AuthServiceService);
+  toast= inject(ToastService);
 
   SignUp() {
     this.signUpError = '';
@@ -49,7 +51,8 @@ export class SignUpComponent {
     this.authSrv.signUpTheUser(this.signUpObj).subscribe({
       next: (params: any) => {
         this.route.navigateByUrl('/signin');
-        this.isLoading = true;
+        this.isLoading = false;
+        this.toast.show(this.text.form.sucessMessages.signedUp);
       },
       error: (response) => {
         if (response.status === 409) {

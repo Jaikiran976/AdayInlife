@@ -7,6 +7,8 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { DiaryEntriesService } from '../../../Services/DiaryEntryService/diary-entries.service';
 import { HttpClient } from '@angular/common/http';
 import { CustomCalendarComponent } from "../custom-calendar/custom-calendar.component";
+import { ToastService } from '../../../Services/ToastServices/toast.service';
+import { AppText } from '../../../../assets/data/constants/texts';
 
 @Component({
   selector: 'app-diary-entry',
@@ -24,11 +26,12 @@ import { CustomCalendarComponent } from "../custom-calendar/custom-calendar.comp
 export class DiaryEntryComponent {
   diarySrv = inject(DiaryEntriesService);
   sanitizer = inject(DomSanitizer);
+  toast= inject(ToastService);
 
   JsonContent: string = '';
   livePreviewHtml: SafeHtml = '';
   showPreview = false;
-  saveSuccess = false;
+  text= AppText;
 
   // Set default date as today in yyyy-MM-dd format
   diaryDate: Date = new Date(); // store Date type, not string
@@ -58,8 +61,7 @@ export class DiaryEntryComponent {
         this.modeOfDay = '';
         this.showPreview = false;
 
-        this.saveSuccess = true;
-        setTimeout(() => this.saveSuccess = false, 2200);
+        this.toast.show(this.text.sucessMessages.entrySaved);
       },
       error: (err) => {
         console.error('Error saving diary:', err);

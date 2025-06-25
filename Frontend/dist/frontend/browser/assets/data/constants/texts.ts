@@ -31,13 +31,13 @@ export const AppText = {
         },
         buttons: {
             signup: 'Create Account',
+            signUpLoading: 'Signing up',
             signIn: 'Sign In',
-            signInLoading: 'Signing in'
+            signInLoading: 'Signing in',
+        },
+        sucessMessages:{
+            signedUp: '✅ Signed up successfully.'
         }
-    },
-
-    links:{
-        
     },
 
     home: {
@@ -55,5 +55,9 @@ export const AppText = {
 
     textEditor:{
         placeholder: 'Enter the text...'
+    },
+
+    sucessMessages:{
+        entrySaved: '✅ Diary entry saved!'
     }
 }
