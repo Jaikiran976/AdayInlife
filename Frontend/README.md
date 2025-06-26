@@ -1,59 +1,80 @@
-# Frontend
+# 🧾 Frontend – A day In Life
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.7.
+This is the **Angular** frontend for _A day In Life_, a personal diary application that allows users to write, view, and manage daily entries. It includes a rich text editor, theming, reusable components, and API integration for a seamless user experience.
 
-## Development server
+---
 
-To start a local development server, run:
+## ⚙️ Technologies & Tools
 
-```bash
+- Angular 19
+- SCSS for styling
+- Quill rich-text editor (with live preview)
+- Custom reusable components (Text-Editor, Dropdown, Calendar, Toast)
+- Angular Router & Reactive Forms
+
+---
+
+## 🚀 Getting Started
+
+# 1. Clone the Repository
+git clone https://github.com/Jaikiran976/AdayInlife
+cd adayinlife/Frontend
+
+# 2. Install Dependencies
+npm install
+
+# 3. Start the Development Server
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Then open http://localhost:4200 in your browser.
 
-## Code scaffolding
+# 4.Update the backend API URL in the environment files:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+// src/environments/environment.ts for local setup  
+export const environment = {
+  production: false,
+  baseApiUrl:'https://localhost:7113'
+};
 
-```bash
-ng generate component component-name
-```
+// src/environments/environment.prod.ts for live setup
+export const environment = {
+  production: true,
+  baseApiUrl:'backendurl'
+};
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## ✨ Frontend Highlights
 
-## Building
+- 📝 Rich-text diary editor with live preview  
+- 🎨 Theme toggle (light/dark mode)  
+- 🧩 Custom reusable UI components (Text-Editor, Dropdown, Calendar, Toast)  
+- 📱 Responsive design and routing  
 
-To build the project run:
+For a complete list of features and project overview, please refer to the [main README](../README.md).
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 📁 Frontend Structure
 
-## Running unit tests
+Frontend/
+├── src/
+│   ├── app/
+│   │   ├── Guards/                 # Route guards for authentication and authorization
+│   │   ├── Models/                 # TypeScript models
+│   │   ├── Pages/                  # Views like login, register, diary, etc.
+│   │   ├── Services/               # API calls and utility services
+│   │   ├── Shared/                 # Shared features across the app
+│   │   │   └── components/         # Reusable components (dropdown, calendar, toast)
+│   │   └── app.module.ts           # Main Angular module and theme setup
+│   ├── assets/                     # Static assets like images, App-wide content
+│   ├── environments/               # Environment-specific config (API URLs, flags)
+│   └── Styles/                     # Global styles, color variables, breakpoints
+├── angular.json                    # Angular CLI configuration
+└── README.md                       # Frontend project documentation (this file)
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+---
 
-```bash
-ng test
-```
+## 🙋‍♂️ About
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Made with ❤️ by [Jai Kiran](https://jaikiran.netlify.app/)
