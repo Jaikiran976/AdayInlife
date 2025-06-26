@@ -18,10 +18,14 @@ This is the **ASP.NET Core Web API** backend for _A day In Life_, a personal dia
 ## 🚀 Getting Started
 
 ### 1. Clone the Repository
+
+```bash
 git clone https://github.com/Jaikiran976/AdayInlife
 cd adayinlife/Backend
+```
 
 ### 2. Configure Environment Variables
+
 Create a file named `appsettings.Development.json` in the `Backend/` folder and add the following structure:
 
 ```json
@@ -47,16 +51,21 @@ Create a file named `appsettings.Development.json` in the `Backend/` folder and 
     }
   }
 }
+```
+
 ⚠️ Important: Do not commit this file to version control. Add it to .gitignore to keep sensitive credentials secure.
 
 ### 3. Restore Dependencies and Build
 
+```bash
 dotnet restore
 dotnet build
-
+```
 ### 4. Run the API
 
+```bash
 dotnet run
+```
 
 By default, the API will run at https://localhost:7113 (or your configured port).
 
@@ -64,6 +73,7 @@ By default, the API will run at https://localhost:7113 (or your configured port)
 
 ## 📁 Backend Structure
 
+<pre> ```plaintext
 Backend/
 ├── Controllers/                 # API endpoint controllers (Auth, Diary, etc.)
 ├── Data/                        # MongoDB context and configuration
@@ -72,6 +82,7 @@ Backend/
 ├── appsettings.Development.json# Environment-specific config file
 ├── Program.cs                   # Entry point and middleware setup
 └── Dockerfile                   # Optional Docker setup (if used) for prod build
+ ``` </pre>
 
 ---
 

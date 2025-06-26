@@ -17,30 +17,41 @@ This is the **Angular** frontend for _A day In Life_, a personal diary applicati
 ## 🚀 Getting Started
 
 # 1. Clone the Repository
+
+```bash
 git clone https://github.com/Jaikiran976/AdayInlife
 cd adayinlife/Frontend
+```
 
 # 2. Install Dependencies
+```bash
 npm install
+```
 
 # 3. Start the Development Server
+```bash
 ng serve
+```
 
 Then open http://localhost:4200 in your browser.
 
 # 4.Update the backend API URL in the environment files:
 
 // src/environments/environment.ts for local setup  
+```ts
 export const environment = {
   production: false,
   baseApiUrl:'https://localhost:7113'
 };
+```
 
 // src/environments/environment.prod.ts for live setup
+```ts
 export const environment = {
   production: true,
   baseApiUrl:'backendurl'
 };
+```
 
 ---
 
@@ -57,6 +68,7 @@ For a complete list of features and project overview, please refer to the [main 
 
 ## 📁 Frontend Structure
 
+<pre> ```plaintext
 Frontend/
 ├── src/
 │   ├── app/
@@ -72,6 +84,7 @@ Frontend/
 │   └── Styles/                     # Global styles, color variables, breakpoints
 ├── angular.json                    # Angular CLI configuration
 └── README.md                       # Frontend project documentation (this file)
+ ``` </pre>
 
 ---
 
