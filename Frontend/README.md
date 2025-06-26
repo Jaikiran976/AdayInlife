@@ -68,7 +68,7 @@ For a complete list of features and project overview, please refer to the [main 
 
 ## 📁 Frontend Structure
 
-<pre> ```plaintext
+```plaintext
 Frontend/
 ├── src/
 │   ├── app/
@@ -84,7 +84,7 @@ Frontend/
 │   └── Styles/                     # Global styles, color variables, breakpoints
 ├── angular.json                    # Angular CLI configuration
 └── README.md                       # Frontend project documentation (this file)
- ``` </pre>
+ ```
 
 ---
 

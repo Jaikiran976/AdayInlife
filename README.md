@@ -35,13 +35,13 @@
 
 ## 📁 Project Structure
 
-<pre> ```plaintext
+ ```plaintext
 AdayInLife/
 ├── Frontend/      # Angular client application
 ├── Backend/       # .NET Core Web API backend
 ├── screenshots/   # Screenshots used in README
 └── README.md      # You're here
- ``` </pre>
+ ``` 
  
 ---
 

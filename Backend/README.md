@@ -73,7 +73,7 @@ By default, the API will run at https://localhost:7113 (or your configured port)
 
 ## 📁 Backend Structure
 
-<pre> ```plaintext
+```plaintext
 Backend/
 ├── Controllers/                 # API endpoint controllers (Auth, Diary, etc.)
 ├── Data/                        # MongoDB context and configuration
@@ -82,7 +82,7 @@ Backend/
 ├── appsettings.Development.json# Environment-specific config file
 ├── Program.cs                   # Entry point and middleware setup
 └── Dockerfile                   # Optional Docker setup (if used) for prod build
- ``` </pre>
+ ``` 
 
 ---
 
