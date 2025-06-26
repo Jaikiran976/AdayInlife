@@ -22,18 +22,19 @@ git clone https://github.com/Jaikiran976/AdayInlife
 cd adayinlife/Backend
 
 ### 2. Configure Environment Variables
-Create a file named appsettings.Development.json in the Backend/ folder and add the following structure:
+Create a file named `appsettings.Development.json` in the `Backend/` folder and add the following structure:
 
+```json
 {
   "FrontendSettings": {
-    "FrontendUrl": "<your frontend URL>"
+    "FrontendUrl": ""
   },
   "JWTSettings": {
     "SecretKey": "<your 32-character secret key>"
   },
   "MongoDbSettings": {
     "AtlasURI": "mongodb://localhost:27017",
-    "DatabaseName": "<your database name>"
+    "DatabaseName": ""
   },
   "EncryptionSettings": {
     "ENCRYPTION_KEY": "<your 32-character encryption key>",
