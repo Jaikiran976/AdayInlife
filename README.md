@@ -58,13 +58,41 @@ Each section contains setup instructions and environment configuration.
 
 ## 📸 Screenshots
 
-| Feature | Screenshot |
-|--------|------------|
-| Editor | ![Editor Screenshot](./screenshots/editor.png) |
-| Entry View | ![Entries Screenshot](./screenshots/entries.png) |
-| Theme Toggle | ![Theme Screenshot](./screenshots/theme.png) |
+### 📝 Editor
 
-> You can find all screenshots in the `/screenshots` folder.
+**Light Mode**  
+![Editor Light](./screenshots/editor-light.png)
+
+**Dark Mode**  
+![Editor Dark](./screenshots/editor-dark.png)
+
+---
+
+### 🔐 Login Page
+
+**Light Mode**  
+![Login Light](./screenshots/login-light.png)
+
+**Dark Mode**  
+![Login Dark](./screenshots/login-dark.png)
+
+---
+
+### 📅 Calendar Picker
+
+**Light Mode**  
+![Calendar Light](./screenshots/calendar-light.png)
+
+**Dark Mode**  
+![Calendar Dark](./screenshots/calendar-dark.png)
+
+---
+
+### 📂 Additional Screens
+
+More screenshots of core features are available in the [`/screenshots`](./screenshots) folder (mostly light mode only).
+
+> 💡 **Pro tip:** The app supports both light and dark themes across all pages; README screenshots highlight the theme toggle where most relevant.
 
 ---
 
