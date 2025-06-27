@@ -61,30 +61,30 @@ Each section contains setup instructions and environment configuration.
 ### 📝 Editor
 
 **Light Mode**  
-![Editor Light](./screenshots/editor-light.png)
+![Editor Light](./screenshots/editor-light.PNG)
 
 **Dark Mode**  
-![Editor Dark](./screenshots/editor-dark.png)
+![Editor Dark](./screenshots/editor-dark.PNG)
 
 ---
 
 ### 🔐 Login Page
 
 **Light Mode**  
-![Login Light](./screenshots/login-light.png)
+![Login Light](./screenshots/login-light.PNG)
 
 **Dark Mode**  
-![Login Dark](./screenshots/login-dark.png)
+![Login Dark](./screenshots/login-dark.PNG)
 
 ---
 
 ### 📅 Calendar Picker
 
 **Light Mode**  
-![Calendar Light](./screenshots/calendar-light.png)
+![Calendar Light](./screenshots/calendar-light.PNG)
 
 **Dark Mode**  
-![Calendar Dark](./screenshots/calendar-dark.png)
+![Calendar Dark](./screenshots/calendar-dark.PNG)
 
 ---
 
