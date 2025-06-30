@@ -1,5 +1,6 @@
 @use 'sass:color';
 @use 'colors' as *;
+@use 'breakpoints' as *;
 
 .diary-editor {
   max-width: 1000px;
@@ -28,6 +29,19 @@
   display: flex;
   width: fit-content;
   gap: 10px;
+  flex-wrap: wrap;
+
+  .custom-button {
+    margin: 0px;
+
+    @include respond-to(tablet) {
+      margin: auto;
+    }
+  }
+
+  @include respond-to(tablet) {
+    flex-wrap: nowrap;
+  }
 }
 
 @keyframes fadeInDropdown {
