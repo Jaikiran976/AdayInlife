@@ -1,18 +1,20 @@
-<div class="entrys">
+<div class="entries">
   <div class="entry" *ngFor="let entry of entries">
     <div class="entry-wrapper">
       <div class="entry-header">
         <div class="entry-meta">
-          <span>{{ entry.date | date:'dd MMM yyyy' }}</span> |
-          <span>{{ entry.mood }}</span>
+          <span class="entry-date">{{ entry.date | date:'dd MMM yyyy' }}</span>
+          <span *ngIf="entry.mood"> | </span>
+          <span *ngIf="entry.mood">{{ entry.mood }}</span>
         </div>
-        <!-- <div class="entry-actions">
-          <button aria-label="Edit entry">✏️</button>
-          <button aria-label="Delete entry">🗑️</button>
-        </div> -->
       </div>
 
-      <div class="entry-content" [innerHTML]="entry.content"></div>
+      <div class="entry-content" *ngIf="!entry.expanded">
+        {{ entry.content | stripHtml | slice:0:200 }}
+        <span *ngIf="(entry.content | stripHtml).length > 200">...</span>
+        <a class="read-more" *ngIf="(entry.content | stripHtml).length > 200" (click)="entry.expanded = true">Read
+          More</a>
+      </div>
     </div>
   </div>
 </div>

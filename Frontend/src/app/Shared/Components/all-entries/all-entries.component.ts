@@ -12,6 +12,7 @@ import { UpdateEntryModel } from '../../../Models/updateentry.module';
 export class AllEntriesComponent {
   diarySrv = inject(DiaryEntriesService);
   entries: UpdateEntryModel[] = [];
+  
   constructor() {
     var token = sessionStorage.getItem('TokenData');
     if (token == null)

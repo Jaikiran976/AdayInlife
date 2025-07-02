@@ -12,7 +12,7 @@
     background-color: $surface-color;
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     display: grid;
     gap: 16px;
 
@@ -23,6 +23,12 @@
       align-items: flex-start;
     }
   }
+}
+
+.editor-header {
+  font-size: $font-size-lg;
+  font-weight: 500;
+  margin: 0;
 }
 
 .diary-actions {
@@ -81,6 +87,11 @@
     border-top: 1px dashed $muted-text-color;
     padding-top: 10px;
     margin-top: 10px;
+    word-break:break-all;
+    
+    ::ng-deep p {
+      margin: 0px;
+    }
   }
 }
 
@@ -99,7 +110,7 @@
   .diary-editor {
     .diary-entry-form {
       background-color: $dark-surface-color;
-      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
     }
   }
 
