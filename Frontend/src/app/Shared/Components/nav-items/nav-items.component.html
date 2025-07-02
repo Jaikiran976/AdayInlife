@@ -1,0 +1,5 @@
+<nav class="nav-center" role="navigation" aria-label="Main navigation">
+    <a *ngFor="let item of menuItems" [routerLink]="item.path" routerLinkActive="active" tabindex="0">{{ item.label
+        }}</a>
+    <a href="#" (click)="logOut()" tabindex="0">🔓 Logout</a>
+</nav>

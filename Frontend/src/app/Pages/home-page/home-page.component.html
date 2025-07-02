@@ -1,14 +1,25 @@
 <div class="home-page">
-    <div class="nav">
-        <!-- <app-profile></app-profile> -->
-        <app-hamburger></app-hamburger>
-    </div>
+  <header class="nav">
+    <div class="nav-left">A day In Life</div>
 
-    <div>
-        {{username}}
-    </div>
-    <div> {{ today | date:'EEE, dd MMM yyyy' }}</div>
-    <div class="content-wrapper">
-        <router-outlet></router-outlet>
-    </div>
+    <app-nav-items></app-nav-items>
+
+    <!-- <div class="nav-right">
+      <app-profile></app-profile>
+    </div> -->
+  </header>
+
+  <main>
+    <section class="greetings">
+      <div>
+        Hi {{ username }}
+      </div>
+      <div>{{ today | date: 'EEE, dd MMM yyyy' }}</div>
+    </section>
+
+    <section class="content-wrapper">
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+
 </div>

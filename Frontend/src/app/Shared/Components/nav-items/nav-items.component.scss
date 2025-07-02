@@ -1,0 +1,73 @@
+@use 'sass:color';
+@use 'colors' as *;
+@use 'breakpoints' as *;
+
+.nav-center {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    row-gap: .1rem;
+
+    a {
+        text-decoration: none;
+        color: $text-color;
+        font-weight: 500;
+        font-size: $font-size-base;
+        padding: 0.25rem 0;
+
+        &:hover,
+        &:focus {
+            color: $primary-color;
+        }
+
+        &.active {
+            font-weight: 600;
+            color: $primary-dark;
+        }
+    }
+
+    a[href="#"] {
+        color: $error-color;
+
+        &:hover,
+        &:focus {
+            color: color.adjust($error-color, $lightness: -10%);
+        }
+    }
+}
+
+@include respond-to(tablet) {
+    .nav-center {
+        border: none;
+        padding-left: 1rem;
+        margin-bottom: 0;
+    }
+}
+
+
+//dark theme changes
+:host-context([data-theme="dark"]) {
+    .nav-center {
+        a {
+            color: $dark-text-color;
+
+            &:hover,
+            &:focus {
+                color: $dark-primary-color;
+            }
+
+            &.active {
+                color: $dark-primary-color;
+            }
+        }
+
+        a[href="#"] {
+            color: $dark-error-color;
+
+            &:hover,
+            &:focus {
+                color: color.adjust($dark-error-color, $lightness: -10%);
+            }
+        }
+    }
+}

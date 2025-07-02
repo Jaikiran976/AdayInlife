@@ -1,13 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HamburgerComponent } from "../../Shared/Components/hamburger/hamburger.component";
-import { ProfileComponent } from "../../Shared/Components/profile/profile.component";
 import { AuthServiceService } from '../../Services/AuthServices/auth-service.service';
+import { NavItemsComponent } from "../../Shared/Components/nav-items/nav-items.component";
 
 @Component({
   selector: 'app-home-page',
-  imports: [CommonModule, RouterOutlet, HamburgerComponent],
+  imports: [CommonModule, RouterOutlet, NavItemsComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })

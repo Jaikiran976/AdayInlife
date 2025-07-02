@@ -1,19 +1,19 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { AuthServiceService } from '../../../Services/AuthServices/auth-service.service';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-hamburger',
+  selector: 'app-nav-items',
   imports: [CommonModule, RouterModule],
-  templateUrl: './hamburger.component.html',
-  styleUrl: './hamburger.component.scss'
+  templateUrl: './nav-items.component.html',
+  styleUrl: './nav-items.component.scss'
 })
-export class HamburgerComponent {
+export class NavItemsComponent {
   isChecked: boolean = false;
   menuItems = [
-    { label: 'Home', path: '/home' },
-    { label: 'All Entries', path: '/allentries' },
+    { label: '📓 New Entry', path: '/home' },
+    { label: '📂 Entries', path: '/allentries' }
   ];
 
   auth = inject(AuthServiceService);

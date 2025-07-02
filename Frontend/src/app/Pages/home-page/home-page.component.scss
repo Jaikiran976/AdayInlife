@@ -1,19 +1,123 @@
 @use 'breakpoints' as *;
+@use 'sass:color';
+@use 'colors' as *;
 
 .home-page {
-    margin: auto;
-    width: calc(100% - 40px);
-    max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: calc(100% - 40px);
+  max-width: 1200px;
+  color: $text-color;
 }
 
-.nav {
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.greetings {
+  padding: 1rem;
+  font-size: $font-size-base;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-bottom: 1px solid color.adjust($muted-text-color, $lightness: 30%);
 }
 
 .content-wrapper {
-    padding-top: 40px;
-    padding-bottom: 80px;
+  padding: 1.5rem 1rem;
+}
+
+header.nav {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    padding-top: 1rem;
+    padding-bottom: 0px;
+    border-bottom: 1px solid color.adjust($muted-text-color, $lightness: 30%);
+    background-color: $surface-color;
+
+    .nav-left {
+        font-size: $font-size-xl;
+        font-weight: bold;
+        color: $primary-dark;
+        margin-bottom: 0.5rem;
+        padding-right: 3.5rem; // To avoid overlap with profile
+    }
+
+    .nav-right {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+}
+
+@include respond-to(tablet) {
+    header.nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .nav-left {
+            margin-bottom: 0;
+            padding-right: 0;
+            flex: 1;
+        }
+
+        .nav-right {
+            position: static;
+            justify-content: flex-end;
+        }
+    }
+}
+
+//dark theme changes
+:host-context([data-theme="dark"]) {
+  .home-page {
+    color: $dark-text-color;
+  }
+
+  .greetings {
+    background-color: $dark-surface-color;
+    border-bottom: 1px solid color.adjust($dark-muted-text-color, $lightness: 20%);
+    color: $dark-text-color;
+  }
+
+  .content-wrapper {
+    color: $dark-text-color;
+  }
+
+  header.nav {
+    background-color: $dark-surface-color;
+    border-bottom: 1px solid color.adjust($dark-muted-text-color, $lightness: 20%);
+
+    .nav-left {
+      color: $dark-primary-color;
+    }
+
+    .nav-center {
+      border-bottom: 1px solid color.adjust($dark-muted-text-color, $lightness: 20%);
+
+      a {
+        color: $dark-text-color;
+
+        &:hover,
+        &:focus {
+          color: $dark-primary-color;
+        }
+
+        &.active {
+          color: $dark-primary-color;
+        }
+      }
+
+      a[href="#"] {
+        color: $dark-error-color;
+
+        &:hover,
+        &:focus {
+          color: color.adjust($dark-error-color, $lightness: -10%);
+        }
+      }
+    }
+  }
 }

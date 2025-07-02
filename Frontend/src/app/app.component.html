@@ -1,11 +1,9 @@
 <div class="body-wrapper" [attr.data-theme]="isDark ? 'dark' : 'light'">
+    <app-toast></app-toast>
+
+    <router-outlet />
+
     <div (click)="toggleTheme()" (keydown.enter)="toggleTheme()" class="themeChangeButton" tabindex="0">
         <i class="fas" [ngClass]="isDark ? 'fa-moon' : 'fa-sun'"></i>
     </div>
-
-    <app-toast></app-toast>
-
-    <main>
-        <router-outlet />
-    </main>
 </div>

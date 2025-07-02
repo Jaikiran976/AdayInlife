@@ -1,12 +1,14 @@
-<div class="login-page">
-    <div class="hero">
-        <div class="login-Image-wrapper">
-            <div class="login-page__image"></div>
-            <h1 class="tagline">{{text.hero.tagline}}</h1>
-            <p class="subheading">{{text.hero.subheading}}</p>
+<main>
+    <div class="login-page">
+        <div class="hero">
+            <div class="login-Image-wrapper">
+                <div class="login-page__image"></div>
+                <h1 class="tagline">{{text.hero.tagline}}</h1>
+                <p class="subheading">{{text.hero.subheading}}</p>
+            </div>
+        </div>
+        <div class="login-page__formwrapper">
+            <router-outlet></router-outlet>
         </div>
     </div>
-    <div class="login-page__formwrapper">
-        <router-outlet></router-outlet>
-    </div>
-</div>
+</main>

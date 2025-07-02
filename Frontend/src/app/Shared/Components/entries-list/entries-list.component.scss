@@ -11,7 +11,8 @@
   }
 
   .entry {
-    width: 70%;
+    width: 100%;
+    max-width: 600px;
     min-height: 200px;
     background-color: $surface-color;
     margin: 0 auto;
