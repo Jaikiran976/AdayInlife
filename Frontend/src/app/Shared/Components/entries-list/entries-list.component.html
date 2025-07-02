@@ -15,6 +15,10 @@
         <a class="read-more" *ngIf="(entry.content | stripHtml).length > 200" (click)="entry.expanded = true">Read
           More</a>
       </div>
+
+      <div class="entry-content" *ngIf="entry.expanded" [innerHTML]="entry.content">
+        <!-- after its expanded content will come here-->
+      </div>
     </div>
   </div>
 </div>
