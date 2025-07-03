@@ -52,7 +52,7 @@ export class SignUpComponent {
       next: (params: any) => {
         this.route.navigateByUrl('/signin');
         this.isLoading = false;
-        this.toast.show(this.text.form.sucessMessages.signedUp);
+        this.toast.show(this.text.form.sucessMessages.signedUp, 'success');
       },
       error: (response) => {
         if (response.status === 409) {

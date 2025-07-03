@@ -61,7 +61,7 @@ export class DiaryEntryComponent {
         this.modeOfDay = '';
         this.showPreview = false;
 
-        this.toast.show(this.text.sucessMessages.entrySaved);
+        this.toast.show(this.text.sucessMessages.entrySaved,'success');
       },
       error: (err) => {
         console.error('Error saving diary:', err);

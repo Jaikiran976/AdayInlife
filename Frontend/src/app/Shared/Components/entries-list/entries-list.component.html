@@ -7,6 +7,15 @@
           <span *ngIf="entry.mood"> | </span>
           <span *ngIf="entry.mood">{{ entry.mood }}</span>
         </div>
+
+        <div class="entry-actions">
+          <!-- <button class="icon-btn edit" (click)="onEdit(entry)">
+            <i class="fas fa-pen"></i>
+          </button> -->
+          <button class="icon-btn delete" (click)="onDeleteClicked(entry)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
       </div>
 
       <div class="entry-content" *ngIf="!entry.expanded">
@@ -22,3 +31,8 @@
     </div>
   </div>
 </div>
+
+<!-- Confirm Delete Dialog -->
+<app-confirm-dialog *ngIf="showConfirmDialog" [title]="confirmDialogData.title" [message]="confirmDialogData.message"
+  [confirmText]="confirmDialogData.confirmText" [cancelText]="confirmDialogData.cancelText"
+  (confirm)="onConfirmDelete()" (cancel)="closeConfirmDialog()" />

@@ -4,6 +4,9 @@ using Backend.Models.Dtos;
 using Backend.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Update;
+using MongoDB.Bson;
+using SharpCompress.Common;
 
 namespace Backend.Controllers
 {
@@ -70,8 +73,45 @@ namespace Backend.Controllers
                 return NotFound(new { message = "User does not exist in database." });
             }
 
-            var entries = await _context.diaryEntries.Where(e => e.userName == username).ToListAsync();
+            var entries = await _context.diaryEntries.Where(u => u.userName == username).ToListAsync();
             return Ok(entries);
+        }
+
+        //update a entry
+        [HttpPut("UpdateEntry")]
+        public async Task<IActionResult> UpdateEntry([FromBody] DiaryEntry updatedEntry)
+        {
+            var existingEntry = await _context.diaryEntries.FirstOrDefaultAsync(e => e.Id == updatedEntry.Id);
+
+            if (existingEntry == null) return NotFound();
+
+            //if (existing.Locked) return BadRequest("Entry is locked and cannot be edited.");
+            existingEntry.content = updatedEntry.content;
+            existingEntry.mood = updatedEntry.mood;
+            existingEntry.date = updatedEntry.date;
+
+            _context.SaveChanges();
+
+            return Ok(existingEntry);
+        }
+
+        //delete a entry
+        [HttpDelete("DeleteEntry")]
+        public async Task<IActionResult> DeleteEntry([FromQuery] string id)
+        {
+            if (!ObjectId.TryParse(id, out var objectId))
+            {
+                return BadRequest("Invalid ObjectId format.");
+            }
+
+            var existingEntry = await _context.diaryEntries.FirstOrDefaultAsync(e => e.Id == objectId);
+
+            if (existingEntry == null) return NotFound();
+
+            _context.diaryEntries.Remove(existingEntry);
+            _context.SaveChanges();
+
+            return NoContent();
         }
     }
 }

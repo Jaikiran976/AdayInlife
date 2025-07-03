@@ -89,7 +89,7 @@ export class ForgotPasswordComponent {
     this.authSrv.changePassword(this.changePasswordObj).subscribe({
       next: (params: any) => {
         this.isLoading = false;
-        this.toast.show(this.text.form.sucessMessages.changedPassword)
+        this.toast.show(this.text.form.sucessMessages.changedPassword, 'success')
         this.showSignIn();
       },
       error: (response) => {

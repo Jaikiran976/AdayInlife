@@ -25,4 +25,8 @@ export class DiaryEntriesService {
   getAllEntries(token: string): Observable<UpdateEntryModel[]> {
     return this.http.get<UpdateEntryModel[]>(`${this.baseapiurl}/api/DiaryEntries/GetAllEntries?token=${token}`);
   }
+
+  deleteEntry(id: any): Observable<string>{
+    return this.http.delete<string>(`${this.baseapiurl}/api/DiaryEntries/DeleteEntry?id=${id}`)
+  }
 }

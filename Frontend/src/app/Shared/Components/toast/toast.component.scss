@@ -18,6 +18,21 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     animation: fadeUpOffset 2s ease-in-out forwards;
     pointer-events: none;
+
+    &.success {
+        background-color: $success-color; // Define this in your `colors.scss`
+        color: $bg-color;
+    }
+
+    &.warning {
+        background-color: $warning-color; // Also define in `colors.scss`
+        color: $bg-color;
+    }
+
+    &.error {
+        background-color: $error-color; // Same here
+        color: $bg-color;
+    }
 }
 
 @keyframes fadeUpOffset {
@@ -41,5 +56,20 @@
     .toast {
         background-color: $dark-primary-color;
         color: $dark-text-color;
+
+        &.success {
+            background-color: color.scale($success-color, $lightness: -20%);
+            color: $dark-text-color;
+        }
+
+        &.warning {
+            background-color: color.scale($warning-color, $lightness: -20%);
+            color: $dark-text-color;
+        }
+
+        &.error {
+            background-color: color.scale($error-color, $lightness: -20%);
+            color: $dark-text-color;
+        }
     }
 }

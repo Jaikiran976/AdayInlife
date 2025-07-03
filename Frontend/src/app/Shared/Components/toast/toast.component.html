@@ -1,3 +1,3 @@
-<div class="toast" *ngIf="toastService.toast$ | async as message">
-    {{ message }}
+<div class="toast" *ngIf="toastService.toast$ | async as toast" [ngClass]="toast.type">
+  {{ toast.message }}
 </div>

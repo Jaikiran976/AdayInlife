@@ -1,0 +1,128 @@
+@use 'colors' as *;
+@use 'sass:color';
+@use 'breakpoints' as *;
+
+.confirm-dialog-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+    backdrop-filter: blur(2px);
+}
+
+.confirm-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $surface-color;
+    color: $text-color;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 220px;
+    max-width: 90%;
+    font-size: $font-size-base;
+    animation: fadeInScale 0.2s ease-out;
+
+    @include respond-to(tablet) {
+        width: 320px;
+    }
+
+    h3 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-size: $font-size-lg;
+        color: $primary-color;
+    }
+
+    p {
+        color: $muted-text-color;
+        margin: 0.5rem 0 1rem;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.75rem;
+        margin-top: 1rem;
+
+        button {
+            padding: 0.4rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: $font-size-sm;
+            transition: background-color 0.2s ease;
+        }
+
+        button:first-child {
+            background-color: $surface-color;
+            color: $text-color;
+            border: 1px solid $muted-text-color;
+
+            &:hover {
+                background-color: $secondary-color;
+                color: $text-color;
+            }
+        }
+
+        .danger {
+            background-color: $error-color;
+            color: white;
+
+            &:hover {
+                background-color: color.adjust($error-color, $lightness: -10%);
+            }
+        }
+    }
+}
+
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -45%) scale(0.95);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+:host-context([data-theme="dark"]) {
+    .confirm-dialog {
+        background-color: $dark-surface-color;
+        color: $dark-text-color;
+
+        h3 {
+            color: $dark-primary-color;
+        }
+
+        p {
+            color: $dark-muted-text-color;
+        }
+
+        .actions button:first-child {
+            background-color: $dark-surface-color;
+            color: $dark-text-color;
+            border: 1px solid $dark-muted-text-color;
+
+            &:hover {
+                background-color: $dark-secondary-color;
+                color: $dark-bg-color;
+            }
+        }
+
+        .danger {
+            background-color: $dark-error-color;
+            color: white;
+
+            &:hover {
+                background-color: color.adjust($dark-error-color, $lightness: -10%);
+            }
+        }
+    }
+}

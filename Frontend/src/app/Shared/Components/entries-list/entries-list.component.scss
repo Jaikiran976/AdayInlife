@@ -64,6 +64,31 @@
   }
 }
 
+.icon-btn {
+  background: none;
+  border: none;
+  font-size: .85rem;
+  cursor: pointer;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+
+  &.edit {
+    color: #4caf50;
+  }
+
+  &.delete {
+    color: #f44336;
+  }
+
+  &:hover {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
 :host-context([data-theme="dark"]) {
   .entries .entry {
     background-color: $dark-surface-color;

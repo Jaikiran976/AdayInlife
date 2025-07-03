@@ -12,8 +12,8 @@ import { RouterModule } from '@angular/router';
 export class NavItemsComponent {
   isChecked: boolean = false;
   menuItems = [
-    { label: '📓 New Entry', path: '/home' },
-    { label: '📂 Entries', path: '/allentries' }
+    { label: 'New Entry', path: '/home' , icon:'fa-pen-nib'},
+    { label: 'Entries', path: '/allentries', icon:'fa-book' }
   ];
 
   auth = inject(AuthServiceService);
