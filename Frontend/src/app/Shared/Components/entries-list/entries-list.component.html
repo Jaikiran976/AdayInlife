@@ -1,7 +1,7 @@
 <div class="entries">
   <div class="entry" *ngFor="let entry of entries">
     <div class="entry-wrapper">
-      <div class="entry-header">
+      <div class="entry-header" *ngIf="!entry.editing">
         <div class="entry-meta">
           <span class="entry-date">{{ entry.date | date:'dd MMM yyyy' }}</span>
           <span *ngIf="entry.mood"> | </span>
@@ -9,30 +9,66 @@
         </div>
 
         <div class="entry-actions">
-          <!-- <button class="icon-btn edit" (click)="onEdit(entry)">
+          <button class="icon-btn edit" (click)="onEdit(entry)">
             <i class="fas fa-pen"></i>
-          </button> -->
+          </button>
           <button class="icon-btn delete" (click)="onDeleteClicked(entry)">
             <i class="fas fa-trash"></i>
           </button>
         </div>
       </div>
 
-      <div class="entry-content" *ngIf="!entry.expanded">
-        {{ entry.content | stripHtml | slice:0:200 }}
-        <span *ngIf="(entry.content | stripHtml).length > 200">...</span>
-        <a class="read-more" *ngIf="(entry.content | stripHtml).length > 200" (click)="entry.expanded = true">Read
-          More</a>
+      <div class="entry-edit" *ngIf="entry.editing">
+        <div class="edit-meta-row">
+          <div class="input-wrapper">
+            <label>Date:</label>
+            <app-custom-calendar [selectedDate]="toDate(entry.tempDate)"
+              (selectedDateChange)="entry.tempDate = $event.toISOString()">
+            </app-custom-calendar>
+          </div>
+
+          <div class="input-wrapper">
+            <label for="modeOfDay">Mood of the day:</label>
+            <app-custom-dropdown name="modeOfDay" [(ngModel)]="entry.tempMood" [options]="moodOptions"
+              placeholder="Select mood" required>
+            </app-custom-dropdown>
+          </div>
+        </div>
+
+        <app-custom-text-editor [content]="entry.tempContent || ''" (contentChange)="entry.tempContent = $event"
+          [toolbarId]="'editor-' + entry.id" [placeholder]="'Update your thoughts...'">
+        </app-custom-text-editor>
+
+        <div class="edit-actions">
+          <button class="custom-button" type="button" [disabled]="entry.isSaving" (click)="onSave(entry)">
+            <ng-container *ngIf="!entry.isSaving">Save</ng-container>
+            <ng-container *ngIf="entry.isSaving">Saving<span class="dot-loader"></span></ng-container>
+          </button>
+          
+          <button class="custom-button" type="button" [disabled]="entry.isSaving" (click)="onCancelEdit(entry)">
+            Cancel
+          </button>
+        </div>
+
+      </div>
+
+      <div *ngIf="!entry.editing">
+        <div class="entry-content" *ngIf="!entry.expanded">
+          {{ entry.content | stripHtml | slice:0:200 }}
+          <span *ngIf="(entry.content | stripHtml).length > 200">...</span>
+          <a class="read-more" *ngIf="(entry.content | stripHtml).length > 200" (click)="entry.expanded = true">Read More</a>
+        </div>
+
+        <div *ngIf="entry.expanded" [innerHTML]="entry.content"></div>
       </div>
 
       <div class="entry-content" *ngIf="entry.expanded" [innerHTML]="entry.content">
-        <!-- after its expanded content will come here-->
       </div>
     </div>
   </div>
 </div>
 
-<!-- Confirm Delete Dialog -->
+
 <app-confirm-dialog *ngIf="showConfirmDialog" [title]="confirmDialogData.title" [message]="confirmDialogData.message"
   [confirmText]="confirmDialogData.confirmText" [cancelText]="confirmDialogData.cancelText"
   (confirm)="onConfirmDelete()" (cancel)="closeConfirmDialog()" />

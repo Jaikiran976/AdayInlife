@@ -1,5 +1,6 @@
 @use 'colors' as *;
 @use 'sass:color';
+@use 'breakpoints' as *;
 
 .entries {
   display: grid;
@@ -86,6 +87,39 @@
   &:hover {
     opacity: 0.8;
     transform: scale(1.1);
+  }
+}
+
+.entry-edit {
+  gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+
+  .edit-meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .edit-actions {
+    display: flex;
+    width: fit-content;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    .custom-button {
+      margin: 0px;
+      white-space: nowrap;
+
+      @include respond-to(tablet) {
+        margin: auto;
+      }
+    }
+
+    @include respond-to(tablet) {
+      flex-wrap: nowrap;
+    }
   }
 }
 

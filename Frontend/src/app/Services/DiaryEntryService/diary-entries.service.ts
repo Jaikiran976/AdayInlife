@@ -29,4 +29,9 @@ export class DiaryEntriesService {
   deleteEntry(id: any): Observable<string>{
     return this.http.delete<string>(`${this.baseapiurl}/api/DiaryEntries/DeleteEntry?id=${id}`)
   }
+
+  updateEntry(updatedEntry: UpdateEntryModel): Observable<UpdateEntryModel>{
+    return this.http.put<UpdateEntryModel>(`${this.baseapiurl}/api/DiaryEntries/UpdateEntry`,
+      updatedEntry)
+  }
 }
