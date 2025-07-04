@@ -1,16 +1,16 @@
-import { Component, Input, SimpleChanges, inject } from '@angular/core';
+import { Component, inject, Input, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
 import { UpdateEntryModel } from '../../../Models/updateentry.module';
-import { StripHtmlPipe } from '../../pipes/strip-html.pipe';
+import { SafeHtmlPipe } from '../../pipes/SafeHtml.pipe';
 import { DiaryEntriesService } from '../../../Services/DiaryEntryService/diary-entries.service';
 import { ToastService } from '../../../Services/ToastServices/toast.service';
-
 import { ConfirmDialogComponent } from "../confirm-dialog/confirm-dialog.component";
 import { CustomCalendarComponent } from "../custom-calendar/custom-calendar.component";
 import { CustomTextEditorComponent } from "../custom-text-editor/custom-text-editor.component";
 import { CustomDropdownComponent } from '../custom-dropdown/custom-dropdown.component';
+import { FormsModule } from '@angular/forms';
+import { StripHtmlPipe } from "../../pipes/StripHtml.pipe";
+import { DomSanitizer } from '@angular/platform-browser';
 
 interface EntryWithExpanded extends UpdateEntryModel {
   expanded?: boolean;
@@ -23,27 +23,26 @@ interface EntryWithExpanded extends UpdateEntryModel {
 
 @Component({
   selector: 'app-entries-list',
-  standalone: true,
   imports: [
     CommonModule,
     FormsModule,
-    StripHtmlPipe,
+    SafeHtmlPipe,
     ConfirmDialogComponent,
     CustomCalendarComponent,
     CustomTextEditorComponent,
     CustomDropdownComponent,
+    StripHtmlPipe
   ],
   templateUrl: './entries-list.component.html',
   styleUrl: './entries-list.component.scss'
 })
+
 export class EntriesListComponent {
   @Input() entries: EntryWithExpanded[] = [];
 
   diarySrv = inject(DiaryEntriesService);
   toast = inject(ToastService);
-
   moodOptions = ['😊 Happy', '😢 Sad', '😄 Excited', '😡 Angry', '😌 Calm'];
-
   showConfirmDialog = false;
   confirmDialogData = {
     title: '',
@@ -53,9 +52,11 @@ export class EntriesListComponent {
   };
   entryToDelete: EntryWithExpanded | null = null;
 
+  constructor(private sanitizer: DomSanitizer) { }
+
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['entries']?.currentValue?.length) {
-      this.entries = [...changes['entries'].currentValue].map(entry => ({
+    if (changes['entries'] && this.entries?.length) {
+      this.entries = this.entries.map(entry => ({
         ...entry,
         expanded: false,
         tempContent: entry.content,
@@ -101,37 +102,38 @@ export class EntriesListComponent {
   }
 
   onCancelEdit(entry: EntryWithExpanded): void {
-    this.resetEditState(entry);
-    entry.editing = false;
-  }
-
-  resetEditState(entry: EntryWithExpanded): void {
     entry.tempContent = entry.content;
     entry.tempDate = entry.date;
     entry.tempMood = entry.mood;
+    entry.editing = false;
   }
 
-  toDate(dateStr: string | Date | null | undefined): Date | null {
-    if (!dateStr) return null;
+  toDate(dateStr: string | Date | undefined | null): Date {
+    if (!dateStr) {
+      return new Date(); // fallback to current date or any default you prefer
+    }
     return dateStr instanceof Date ? dateStr : new Date(dateStr);
   }
 
-  onDeleteClicked(entry: EntryWithExpanded): void {
+
+  //send dialog box to confirm the deletion
+  onDeleteClicked(entry: EntryWithExpanded) {
     this.entryToDelete = entry;
     this.confirmDialogData = {
       title: 'Delete Entry',
-      message: 'Are you sure you want to delete the entry?',
+      message: `Are you sure you want to delete the entry?`,
       confirmText: 'Delete',
       cancelText: 'Cancel'
     };
     this.showConfirmDialog = true;
   }
 
-  onConfirmDelete(): void {
+  //delete the entry 
+  onConfirmDelete() {
     if (!this.entryToDelete) return;
 
     this.diarySrv.deleteEntry(this.entryToDelete.id).subscribe({
-      next: () => {
+      next: (params: any) => {
         this.entries = this.entries.filter(e => e.id !== this.entryToDelete?.id);
         this.closeConfirmDialog();
         this.toast.show('✅ Entry deleted successfully', 'success');
@@ -147,7 +149,8 @@ export class EntriesListComponent {
     });
   }
 
-  closeConfirmDialog(): void {
+  //close dialog box 
+  closeConfirmDialog() {
     this.showConfirmDialog = false;
     this.entryToDelete = null;
   }

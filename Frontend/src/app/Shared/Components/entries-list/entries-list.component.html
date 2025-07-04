@@ -44,7 +44,7 @@
             <ng-container *ngIf="!entry.isSaving">Save</ng-container>
             <ng-container *ngIf="entry.isSaving">Saving<span class="dot-loader"></span></ng-container>
           </button>
-          
+
           <button class="custom-button" type="button" [disabled]="entry.isSaving" (click)="onCancelEdit(entry)">
             Cancel
           </button>
@@ -54,15 +54,13 @@
 
       <div *ngIf="!entry.editing">
         <div class="entry-content" *ngIf="!entry.expanded">
-          {{ entry.content | stripHtml | slice:0:200 }}
+          <span [innerHTML]="entry.content.slice(0, 200) | safeHtml"></span>
           <span *ngIf="(entry.content | stripHtml).length > 200">...</span>
-          <a class="read-more" *ngIf="(entry.content | stripHtml).length > 200" (click)="entry.expanded = true">Read More</a>
+          <a class="read-more" *ngIf="(entry.content | stripHtml).length > 200" (click)="entry.expanded = true">Read
+            More</a>
         </div>
 
-        <div *ngIf="entry.expanded" [innerHTML]="entry.content"></div>
-      </div>
-
-      <div class="entry-content" *ngIf="entry.expanded" [innerHTML]="entry.content">
+        <div class="entry-content" *ngIf="entry.expanded" [innerHTML]="entry.content"></div>
       </div>
     </div>
   </div>
