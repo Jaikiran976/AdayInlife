@@ -4,9 +4,7 @@ using Backend.Models.Dtos;
 using Backend.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Update;
 using MongoDB.Bson;
-using SharpCompress.Common;
 
 namespace Backend.Controllers
 {

@@ -1,0 +1,97 @@
+@use 'colors' as *;
+@use 'sass:color';
+@use 'breakpoints' as *;
+
+.filters {
+  display: grid;
+  gap: 16px;
+  align-items: end;
+  justify-content: center;
+  margin: auto;
+
+  width: 100%;
+  max-width: 720px;
+  box-sizing: border-box;
+
+  grid-template-columns: 1fr;
+
+  ::ng-deep .validationerror {
+    display: none;
+  }
+
+  .clear-button {
+    grid-column: span 1;
+    justify-self: start;
+  }
+
+  @media (min-width: 600px) and (max-width: 899px) {
+    grid-template-columns: repeat(2, 1fr);
+
+    .clear-button {
+      grid-column: span 2;
+    }
+  }
+
+  @media (min-width: 900px) {
+    grid-template-columns: repeat(3, 1fr);
+
+    .clear-button {
+      grid-column: span 3;
+    }
+  }
+}
+
+.clear-button {
+    appearance: none;
+    background: none;
+    border: none;
+    font-size: $font-size-sm;
+    position: relative;
+    right: 0;
+    left: auto;
+    color: $primary-dark;
+    cursor: pointer;
+    border-radius: 2%;
+    text-decoration: underline;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+        color: $accent-color;
+    }
+
+    &:focus {
+        outline-offset: 2px;
+        outline: 2px solid color.adjust($primary-color, $lightness: 5%);
+    }
+}
+
+.empty-state {
+    text-align: center;
+    margin-top: 2rem;
+    color: $muted-text-color;
+
+    p {
+        margin: 0.5rem 0;
+    }
+}
+
+//dark theme changes
+:host-context([data-theme="dark"]) {
+    .clear-button {
+        color: color.adjust($dark-primary-color, $lightness: -10%);
+        text-decoration: underline;
+        transition: color 0.2s;
+
+        &:hover {
+            color: $dark-accent-color;
+        }
+
+        &:focus {
+            outline: 2px solid color.adjust($dark-primary-color, $lightness: 5%);
+        }
+    }
+
+    .empty-state {
+        color: $dark-muted-text-color;
+    }
+}

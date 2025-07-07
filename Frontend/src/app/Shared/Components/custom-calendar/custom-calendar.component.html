@@ -1,6 +1,6 @@
 <div class="calendar-wrapper">
-  <input readonly id="diaryDate" [value]="selectedDateString" (click)="toggleCalendar()" class="calendar-input custom-input"
-    placeholder="Select date" />
+  <input readonly id="diaryDate" [value]="selectedDate | date:'dd MMM y'" (click)="toggleCalendar()"
+    (keydown.ENTER)="toggleCalendar()" class="calendar-input custom-input" placeholder="Select date" />
 
   <div *ngIf="showCalendar" class="calendar-popup">
     <div class="calendar-header">
