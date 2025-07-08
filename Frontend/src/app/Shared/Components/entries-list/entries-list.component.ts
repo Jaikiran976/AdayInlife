@@ -11,6 +11,7 @@ import { CustomDropdownComponent } from '../custom-dropdown/custom-dropdown.comp
 import { FormsModule } from '@angular/forms';
 import { StripHtmlPipe } from "../../pipes/StripHtml.pipe";
 import { DomSanitizer } from '@angular/platform-browser';
+import { AppText } from '../../../../assets/data/constants/texts';
 
 interface EntryWithExpanded extends UpdateEntryModel {
   expanded?: boolean;
@@ -39,10 +40,10 @@ interface EntryWithExpanded extends UpdateEntryModel {
 
 export class EntriesListComponent {
   @Input() entries: EntryWithExpanded[] = [];
-
+  text= AppText
   diarySrv = inject(DiaryEntriesService);
   toast = inject(ToastService);
-  moodOptions = ['😊 Happy', '😢 Sad', '😄 Excited', '😡 Angry', '😌 Calm'];
+  moodOptions = this.text.moodOptions;
   showConfirmDialog = false;
   confirmDialogData = {
     title: '',

@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { CustomCalendarComponent } from "../custom-calendar/custom-calendar.component";
 import { CustomDropdownComponent } from '../custom-dropdown/custom-dropdown.component';
 import { RouterModule } from '@angular/router';
+import { AppText } from '../../../../assets/data/constants/texts';
 
 interface UpdateEntryWithDate extends UpdateEntryModel {
   dateObj: Date;
@@ -20,7 +21,7 @@ interface UpdateEntryWithDate extends UpdateEntryModel {
 })
 export class AllEntriesComponent {
   diarySrv = inject(DiaryEntriesService);
-
+  text= AppText;
   entries: UpdateEntryModel[] = [];
   allEntries: UpdateEntryWithDate[] = [];
   filteredEntries: UpdateEntryWithDate[] = [];
@@ -28,8 +29,9 @@ export class AllEntriesComponent {
   startDate: Date | null = null;
   endDate: Date | null = null;
   selectedMood: string = '';
-
-  moodOptions = ['😊 Happy', '😢 Sad', '😄 Excited', '😡 Angry', '😌 Calm'];
+  errorMessage: string = '';
+  isloading: boolean = true;
+  moodOptions = this.text.moodOptions;
 
   constructor() {
     const token = sessionStorage.getItem('TokenData') || '';
@@ -56,12 +58,36 @@ export class AllEntriesComponent {
         }
 
         this.endDate = new Date();
-
+        this.isloading = false;
         // Initialize with all entries
         this.filteredEntries = [...this.allEntries];
       },
       error: (response) => {
         // handle error
+        this.isloading = false;
+        this.errorMessage = 'Failed to load entries. Please try again later.';
+      }
+    });
+  }
+
+  retry() {
+    this.isloading = true;
+    this.errorMessage = '';
+    const token = sessionStorage.getItem('TokenData') || '';
+    this.diarySrv.getAllEntries(token).subscribe({
+      next: (params: UpdateEntryModel[]) => {
+        this.entries = params;
+        this.allEntries = this.entries.map(e => ({
+          ...e,
+          dateObj: new Date(e.date)
+        }));
+        this.isloading = false;
+        this.errorMessage = '';
+        this.applyFilter(); // Refresh filtered list
+      },
+      error: () => {
+        this.isloading = false;
+        this.errorMessage = 'Failed to load entries. Please try again later.';
       }
     });
   }

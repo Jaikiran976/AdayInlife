@@ -36,7 +36,7 @@ export class DiaryEntryComponent {
   // Set default date as today in yyyy-MM-dd format
   diaryDate: Date = new Date(); // store Date type, not string
   modeOfDay: string = '';
-  moodOptions = ['😊 Happy', '😢 Sad', '😄 Excited', '😡 Angry', '😌 Calm'];
+  moodOptions = this.text.moodOptions;
   mode: string = 'Select mood...';
 
   @Output() contentChange = new EventEmitter<string>();

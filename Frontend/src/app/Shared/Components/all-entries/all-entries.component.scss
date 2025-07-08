@@ -42,56 +42,76 @@
 }
 
 .clear-button {
-    appearance: none;
-    background: none;
-    border: none;
-    font-size: $font-size-sm;
-    position: relative;
-    right: 0;
-    left: auto;
-    color: $primary-dark;
-    cursor: pointer;
-    border-radius: 2%;
-    text-decoration: underline;
-    transition: color 0.2s ease-in-out;
+  appearance: none;
+  background: none;
+  border: none;
+  font-size: $font-size-sm;
+  position: relative;
+  right: 0;
+  left: auto;
+  color: $primary-dark;
+  cursor: pointer;
+  border-radius: 2%;
+  text-decoration: underline;
+  transition: color 0.2s ease-in-out;
 
-    &:hover {
-        color: $accent-color;
-    }
+  &:hover {
+    color: $accent-color;
+  }
 
-    &:focus {
-        outline-offset: 2px;
-        outline: 2px solid color.adjust($primary-color, $lightness: 5%);
-    }
+  &:focus {
+    outline-offset: 2px;
+    outline: 2px solid color.adjust($primary-color, $lightness: 5%);
+  }
 }
 
 .empty-state {
-    text-align: center;
-    margin-top: 2rem;
-    color: $muted-text-color;
+  text-align: center;
+  margin-top: 2rem;
+  color: $muted-text-color;
 
-    p {
-        margin: 0.5rem 0;
-    }
+  p {
+    margin: 0.5rem 0;
+  }
+}
+
+.loading-holder {
+  text-align: center;
+  margin-top: 30px;
+
+  .spinner {
+    width: 30px;
+    height: 30px;
+    margin-right: 0px;
+  }
+}
+
+.error-message {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  .custom-button{
+    min-width: 100px;
+  }
 }
 
 //dark theme changes
 :host-context([data-theme="dark"]) {
-    .clear-button {
-        color: color.adjust($dark-primary-color, $lightness: -10%);
-        text-decoration: underline;
-        transition: color 0.2s;
+  .clear-button {
+    color: color.adjust($dark-primary-color, $lightness: -10%);
+    text-decoration: underline;
+    transition: color 0.2s;
 
-        &:hover {
-            color: $dark-accent-color;
-        }
-
-        &:focus {
-            outline: 2px solid color.adjust($dark-primary-color, $lightness: 5%);
-        }
+    &:hover {
+      color: $dark-accent-color;
     }
 
-    .empty-state {
-        color: $dark-muted-text-color;
+    &:focus {
+      outline: 2px solid color.adjust($dark-primary-color, $lightness: 5%);
     }
+  }
+
+  .empty-state {
+    color: $dark-muted-text-color;
+  }
 }

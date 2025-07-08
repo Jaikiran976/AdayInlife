@@ -19,20 +19,31 @@
     <button (click)="clearFilter()" class="clear-button" type="button">Clear</button>
 </div>
 
-<!-- No entries yet -->
-<div *ngIf="allEntries.length === 0" class="empty-state">
-    <p>You haven’t written any diary entries yet.</p>
-    <p>Start capturing your thoughts — your journey begins with the first entry!</p>
-    <a class="link" tabindex="0" routerLink="/home">Add New Entry</a>
+<div *ngIf="isloading" class="loading-holder">
+    <span class="spinner"></span>
 </div>
 
-<!-- Filtered results empty -->
-<div *ngIf="filteredEntries.length === 0 && allEntries.length > 0" class="empty-state">
-    <p>No entries match your selected filters.</p>
-    <p>Try adjusting the date range or mood to see more results.</p>
+<div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+    <button (click)="retry()" type="button" class="custom-button">Retry</button>
 </div>
 
-<!-- Display entries -->
-<div *ngIf="allEntries.length > 0 && filteredEntries.length > 0">
-    <app-entries-list [entries]="filteredEntries"></app-entries-list>
+<div *ngIf="!errorMessage && !isloading">
+    <!-- No entries yet -->
+    <div *ngIf="allEntries.length === 0" class="empty-state">
+        <p>You haven’t written any diary entries yet.</p>
+        <p>Start capturing your thoughts — your journey begins with the first entry!</p>
+        <a class="link" tabindex="0" routerLink="/home">Add New Entry</a>
+    </div>
+
+    <!-- Filtered results empty -->
+    <div *ngIf="filteredEntries.length === 0 && allEntries.length > 0" class="empty-state">
+        <p>No entries match your selected filters.</p>
+        <p>Try adjusting the date range or mood to see more results.</p>
+    </div>
+
+    <!-- Display entries -->
+    <div *ngIf="allEntries.length > 0 && filteredEntries.length > 0">
+        <app-entries-list [entries]="filteredEntries"></app-entries-list>
+    </div>
 </div>

@@ -66,5 +66,7 @@ export const AppText = {
 
     sucessMessages: {
         entrySaved: '✅ Diary entry saved!'
-    }
+    },
+
+    moodOptions : ['😊 Happy', '😢 Sad', '😄 Excited', '😡 Angry', '😌 Calm'],
 }
