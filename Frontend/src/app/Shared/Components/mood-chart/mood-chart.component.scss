@@ -22,22 +22,33 @@
   }
 }
 
-.chart-container {
+.chart-scroll-wrapper {
   width: 100%;
   max-width: 800px;
-  height: 300px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chart-container {
+  // width: fit-content;
+  height: 310px;
   position: relative;
 
-  @media (min-width: 768px) {
+  @include respond-to(tablet) {
     height: 400px;
   }
 }
 
-// Canvas styles (light theme)
-::ng-deep canvas {
+.chart-scroll-wrapper {
+  overflow-x: auto;
+  width: 100%; /* full container width */
+}
+
+.chart-scroll-wrapper > canvas {
   display: block;
-  width: 100%;
-  height: 100%;
+  height: 100% !important;
+  min-width: 80%; /* default min width */
 }
 
 .toggle-chart-container {
@@ -86,6 +97,18 @@
       background-color: color.adjust($primary-color, $lightness: -5%);
     }
   }
+
+  // Rounded corners on first and last buttons only
+  button:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+
+  button:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-right: none;
+  }
 }
 
 // Dark theme overrides
@@ -124,5 +147,32 @@
         background-color: color.adjust($dark-primary-color, $lightness: -15%);
       }
     }
+
+    // Rounded corners for dark theme buttons too
+    button:first-child {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+
+    button:last-child {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      border-right: none;
+    }
   }
+
+  // Optional: style scrollbar for dark mode
+  .chart-scroll-wrapper::-webkit-scrollbar-thumb {
+    background-color: $dark-muted-text-color;
+  }
+}
+
+// Optional: scrollbar styling for better UX
+.chart-scroll-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.chart-scroll-wrapper::-webkit-scrollbar-thumb {
+  background-color: $muted-text-color;
+  border-radius: 4px;
 }

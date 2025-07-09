@@ -13,7 +13,10 @@
     <button [class.active]="viewMode === 'monthly'" (click)="onViewModeChange('monthly')">Monthly</button>
     <button [class.active]="viewMode === 'yearly'" (click)="onViewModeChange('yearly')">Yearly</button>
   </div>
-  <div class="chart-container" *ngIf="!isloading && !errorMessage">
-    <canvas baseChart [data]="lineChartData" [options]="lineChartOptions" chartType="line"></canvas>
+
+  <div class="chart-scroll-wrapper">
+    <div class="chart-container" *ngIf="!isloading && !errorMessage">
+      <canvas baseChart [data]="lineChartData" [options]="lineChartOptions" chartType="line"></canvas>
+    </div>
   </div>
 </div>

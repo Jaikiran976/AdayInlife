@@ -232,6 +232,7 @@ export class MoodChartComponent implements AfterViewInit {
         setTimeout(() => {
           this.chart?.update();
           this.updateChartThemeColors();
+          this.refreshChart(); 
         }, 100);
         this.isloading = false;
       },
@@ -319,7 +320,26 @@ export class MoodChartComponent implements AfterViewInit {
     this.lineChartData.labels = this.dateLabels;
     this.lineChartData.datasets[0].data = this.moodValues;
 
-    // Call this to update colors and chart appearance
+    setTimeout(() => {
+      const canvasEl = this.chart?.chart?.canvas as HTMLCanvasElement | undefined;
+      if (!canvasEl) return;
+
+      const container = canvasEl.parentElement;
+      if (!container) return;
+
+      const containerWidth = container.clientWidth;
+
+      const minWidthPerPoint = 60; // px per label
+      const calculatedWidth = Math.max(minWidthPerPoint * this.dateLabels.length, containerWidth * 0.8);
+
+      // Set min-width on canvas (or style width for exact)
+      canvasEl.style.minWidth = `${calculatedWidth}px`;
+      // Optional: set parent container min-width too if needed
+      container.style.minWidth = `${calculatedWidth}px`;
+
+      this.chart?.update();
+    }, 0);
+
     this.updateChartThemeColors();
   }
 
