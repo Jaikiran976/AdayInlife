@@ -8,6 +8,7 @@ import { SignUpComponent } from './Shared/Components/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './Shared/Components/forgot-password/forgot-password.component';
 import { DiaryEntryComponent } from './Shared/Components/diary-entry/diary-entry.component';
 import { AllEntriesComponent } from './Shared/Components/all-entries/all-entries.component';
+import { MoodChartComponent } from './Shared/Components/mood-chart/mood-chart.component';
 
 export const routes: Routes = [
     {
@@ -31,11 +32,12 @@ export const routes: Routes = [
         canActivate: [authGuard],
         children: [
             { path: 'home', component: DiaryEntryComponent },
-            { path:'allentries', component: AllEntriesComponent }
+            { path: 'allentries', component: AllEntriesComponent },
+            { path: 'mood-tracker', component: MoodChartComponent }
         ]
     },
-    { 
-        path: '**', 
-        redirectTo: 'signin' 
-    } 
+    {
+        path: '**',
+        redirectTo: 'signin'
+    }
 ];

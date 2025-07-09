@@ -13,7 +13,8 @@ export class NavItemsComponent {
   isChecked: boolean = false;
   menuItems = [
     { label: 'New Entry', path: '/home' , icon:'fa-pen-nib'},
-    { label: 'Entries', path: '/allentries', icon:'fa-book' }
+    { label: 'Entries', path: '/allentries', icon:'fa-book' },
+    { label: 'Mood Tracker', path: '/mood-tracker', icon: 'fa-chart-line' }
   ];
 
   auth = inject(AuthServiceService);

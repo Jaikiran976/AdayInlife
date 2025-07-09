@@ -68,5 +68,5 @@ export const AppText = {
         entrySaved: '✅ Diary entry saved!'
     },
 
-    moodOptions : ['😊 Happy', '😢 Sad', '😄 Excited', '😡 Angry', '😌 Calm'],
+    moodOptions: ['😊 Happy', '😄 Excited', '😌 Calm', '😢 Sad', '😡 Angry'],
 }

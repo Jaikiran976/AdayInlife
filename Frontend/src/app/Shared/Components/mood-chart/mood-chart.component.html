@@ -1,0 +1,19 @@
+<div *ngIf="errorMessage" class="error-message">
+  <p>{{ errorMessage }}</p>
+  <button (click)="retry()" type="button" class="custom-button">Retry</button>
+</div>
+
+<div *ngIf="isloading" class="loading-holder">
+  <span class="spinner"></span>
+</div>
+
+<div class="toggle-chart-container">
+  <div class="view-toggle">
+    <button [class.active]="viewMode === 'daily'" (click)="onViewModeChange('daily')">Daily</button>
+    <button [class.active]="viewMode === 'monthly'" (click)="onViewModeChange('monthly')">Monthly</button>
+    <button [class.active]="viewMode === 'yearly'" (click)="onViewModeChange('yearly')">Yearly</button>
+  </div>
+  <div class="chart-container" *ngIf="!isloading && !errorMessage">
+    <canvas baseChart [data]="lineChartData" [options]="lineChartOptions" chartType="line"></canvas>
+  </div>
+</div>

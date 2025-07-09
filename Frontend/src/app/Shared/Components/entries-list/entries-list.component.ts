@@ -40,7 +40,7 @@ interface EntryWithExpanded extends UpdateEntryModel {
 
 export class EntriesListComponent {
   @Input() entries: EntryWithExpanded[] = [];
-  text= AppText
+  text = AppText
   diarySrv = inject(DiaryEntriesService);
   toast = inject(ToastService);
   moodOptions = this.text.moodOptions;

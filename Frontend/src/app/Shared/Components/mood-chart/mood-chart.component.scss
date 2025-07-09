@@ -1,0 +1,128 @@
+@use 'colors' as *;
+@use 'sass:color';
+@use 'breakpoints' as *;
+
+.loading-holder {
+  text-align: center;
+  margin-top: 30px;
+
+  .spinner {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.error-message {
+  margin: 20px 0;
+  text-align: center;
+  color: $error-color;
+
+  .custom-button {
+    min-width: 100px;
+  }
+}
+
+.chart-container {
+  width: 100%;
+  max-width: 800px;
+  height: 300px;
+  position: relative;
+
+  @media (min-width: 768px) {
+    height: 400px;
+  }
+}
+
+// Canvas styles (light theme)
+::ng-deep canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.toggle-chart-container {
+  display: grid;
+  gap: 10px;
+  margin: auto;
+  position: relative;
+  width: fit-content;
+  background: $surface-color;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.view-toggle {
+  display: inline-flex;
+  border: 1px solid $muted-text-color;
+  border-radius: 5px;
+  overflow: hidden;
+  user-select: none;
+  width: fit-content;
+  margin-top: 1rem;
+  margin-left: 1rem;
+
+  button {
+    border: none;
+    background: $surface-color;
+    color: $text-color;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+    outline: none;
+
+    &:not(:last-child) {
+      border-right: 1px solid $muted-text-color;
+    }
+
+    &.active {
+      background-color: $primary-color;
+      color: white;
+      font-weight: 600;
+    }
+
+    &:hover:not(.active),
+    &:focus-visible {
+      background-color: color.adjust($primary-color, $lightness: -5%);
+    }
+  }
+}
+
+// Dark theme overrides
+:host-context([data-theme="dark"]) {
+  .toggle-chart-container {
+    background-color: $dark-surface-color;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+  }
+
+  .error-message {
+    color: $dark-error-color;
+  }
+
+  .chart-container {
+    color: $dark-text-color;
+  }
+
+  .view-toggle {
+    border-color: $dark-muted-text-color;
+
+    button {
+      background: $dark-surface-color;
+      color: $dark-text-color;
+
+      &:not(:last-child) {
+        border-right: 1px solid $dark-muted-text-color;
+      }
+
+      &.active {
+        background-color: $dark-primary-color;
+        color: black;
+      }
+
+      &:hover:not(.active),
+      &:focus-visible {
+        background-color: color.adjust($dark-primary-color, $lightness: -15%);
+      }
+    }
+  }
+}
