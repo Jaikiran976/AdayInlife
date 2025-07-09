@@ -22,6 +22,16 @@
   }
 }
 
+.empty-state {
+  text-align: center;
+  margin-top: 2rem;
+  color: $muted-text-color;
+
+  p {
+    margin: 0.5rem 0;
+  }
+}
+
 .chart-scroll-wrapper {
   width: 100%;
   max-width: 800px;

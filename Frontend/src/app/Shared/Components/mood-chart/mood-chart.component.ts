@@ -26,6 +26,7 @@ import {
   Legend,
   Tooltip,
 } from 'chart.js';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 Chart.register(
   LineController,
@@ -41,7 +42,7 @@ Chart.register(
 @Component({
   selector: 'app-mood-chart',
   standalone: true,
-  imports: [CommonModule, BaseChartDirective],
+  imports: [CommonModule, BaseChartDirective, RouterModule],
   templateUrl: './mood-chart.component.html',
   styleUrls: ['./mood-chart.component.scss'],
 })

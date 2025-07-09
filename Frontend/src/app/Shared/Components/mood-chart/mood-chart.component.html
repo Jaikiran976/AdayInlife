@@ -7,7 +7,13 @@
   <span class="spinner"></span>
 </div>
 
-<div class="toggle-chart-container">
+<div *ngIf="diaryEntries.length === 0 && !isloading && !errorMessage" class="empty-state">
+  <p>You haven’t written any diary entries yet.</p>
+  <p>Start capturing your thoughts — your journey begins with the first entry!</p>
+  <a class="link" tabindex="0" routerLink="/home">Add New Entry</a>
+</div>
+
+<div class="toggle-chart-container" *ngIf="!isloading && !errorMessage && diaryEntries.length >0">
   <div class="view-toggle">
     <button [class.active]="viewMode === 'daily'" (click)="onViewModeChange('daily')">Daily</button>
     <button [class.active]="viewMode === 'monthly'" (click)="onViewModeChange('monthly')">Monthly</button>
@@ -15,7 +21,7 @@
   </div>
 
   <div class="chart-scroll-wrapper">
-    <div class="chart-container" *ngIf="!isloading && !errorMessage">
+    <div class="chart-container">
       <canvas baseChart [data]="lineChartData" [options]="lineChartOptions" chartType="line"></canvas>
     </div>
   </div>
